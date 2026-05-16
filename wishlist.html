@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Wishlist - BookHeaven Bookstore</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/profile.css">
+  <link rel="stylesheet" href="assets/css/utilities.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <main class="page-content">
+    
+    <!-- Breadcrumbs Navigation -->
+    <div class="breadcrumb-wrapper">
+      <div class="container">
+        <ul class="breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="profile.html">My Account</a></li>
+          <li>My Wishlist</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Dashboard Main Wrapper -->
+    <section class="container profile-wrapper">
+      
+      <!-- Left Column: User Sidebar Navigation -->
+      <aside class="profile-sidebar">
+        <div class="profile-user-summary">
+          <div class="profile-avatar-wrapper">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150" alt="Avatar" class="profile-avatar" id="sidebar-user-avatar">
+          </div>
+          <h4 class="profile-user-name" id="sidebar-user-name">Guest User</h4>
+          <p class="profile-user-email" id="sidebar-user-email">john@example.com</p>
+        </div>
+
+        <ul class="profile-menu">
+          <li class="profile-menu-item"><a href="profile.html"><i class="ri-user-line"></i> Personal Details</a></li>
+          <li class="profile-menu-item"><a href="orders.html"><i class="ri-survey-line"></i> Order History</a></li>
+          <li class="profile-menu-item active"><a href="wishlist.html"><i class="ri-heart-line"></i> My Wishlist</a></li>
+        </ul>
+      </aside>
+
+      <!-- Right Column: Wishlist grid container -->
+      <div class="profile-content-card">
+        <div class="profile-card-title">
+          <span>My Wishlist</span>
+        </div>
+        
+        <!-- Wishlist Books Cards Grid -->
+        <div class="catalog-books-grid" id="wishlist-books-grid">
+          <!-- Dynamically populated via wishlist.js -->
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div id="footer-container"></div>
+
+  <!-- JS Engines -->
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/validation.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/books.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/wishlist.js"></script>
+
+  <!-- Load sidebar stats -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = Storage.get('bookheaven_logged_in_user');
+      if (user) {
+        document.getElementById('sidebar-user-name').textContent = user.name;
+        document.getElementById('sidebar-user-email').textContent = user.email;
+        if (user.avatar) {
+          document.getElementById('sidebar-user-avatar').src = user.avatar;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

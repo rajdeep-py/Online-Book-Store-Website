@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Details - BookHeaven Bookstore</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/details.css">
+  <link rel="stylesheet" href="assets/css/utilities.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <main class="page-content">
+    
+    <!-- Dynamic Breadcrumb -->
+    <div class="breadcrumb-wrapper">
+      <div class="container">
+        <ul class="breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="books.html">Catalog</a></li>
+          <li id="breadcrumb-category">Genre</li>
+          <li id="breadcrumb-title">Book Title</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Product Details Main container -->
+    <section class="container details-wrapper">
+      <div class="details-grid">
+        
+        <!-- Left Column: Large Cover Image -->
+        <div class="book-gallery">
+          <div class="book-main-image-card">
+            <img id="detail-cover-img" src="https://images-na.ssl-images-amazon.com/images/I/51-nXsSRfZL._SX328_BO1,204,203,200_.jpg" alt="Book Cover">
+          </div>
+        </div>
+
+        <!-- Right Column: Product Content & Actions -->
+        <div class="book-details-info">
+          <div class="book-details-header">
+            <span class="book-details-category" id="detail-category-tag">Genre</span>
+            <h1 class="book-details-title" id="detail-title">Atomic Habits</h1>
+            <p class="book-details-author" id="detail-author">By <span>James Clear</span></p>
+            
+            <div class="book-rating-wrapper">
+              <div class="rating-stars" id="detail-rating-stars">
+                <!-- Stars rendered via JS -->
+              </div>
+              <span class="rating-number" id="detail-rating-num">0.0</span>
+              <span class="book-reviews-count">(1,248 Verified Customer Reviews)</span>
+            </div>
+          </div>
+
+          <div class="book-price-stock-box">
+            <span class="book-details-price" id="detail-price-val">₹0</span>
+            <div class="stock-status in-stock" id="detail-stock-badge">
+              <i class="ri-checkbox-circle-line"></i> In Stock
+              <span class="stock-count-text" id="detail-stock-count">(20 items left)</span>
+            </div>
+          </div>
+
+          <p class="book-details-description" id="detail-desc">
+            Book description content goes here.
+          </p>
+
+          <!-- Action buttons block -->
+          <div class="book-details-actions">
+            <!-- Quantity adjustment inputs -->
+            <div class="quantity-adjuster">
+              <button class="qty-btn" id="qty-minus-btn"><i class="ri-subtract-line"></i></button>
+              <input type="text" class="qty-input" id="qty-input-box" value="1" readonly>
+              <button class="qty-btn" id="qty-plus-btn"><i class="ri-add-line"></i></button>
+            </div>
+
+            <div class="details-action-buttons">
+              <button class="btn btn-primary details-add-to-cart" id="detail-add-cart-btn">
+                <i class="ri-shopping-bag-line"></i> Add to Shopping Cart
+              </button>
+              <button class="btn-icon" id="detail-wishlist-btn" title="Add to Wishlist">
+                <i class="ri-heart-line" style="font-size: 1.25rem;"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick trust seals -->
+          <div class="d-flex gap-4 flex-wrap" style="color: var(--text-muted); font-size: 0.82rem;">
+            <span><i class="ri-truck-line text-primary"></i> Dispatch within 24 Hours</span>
+            <span><i class="ri-shield-check-line text-primary"></i> 100% Secure Simulated Transaction</span>
+            <span><i class="ri-exchange-line text-primary"></i> 7-Day Hassle-Free Returns</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Technical Specifications Section -->
+      <div class="specs-section">
+        <h3 class="specs-title">Book Specifications</h3>
+        <table class="specs-table">
+          <tr>
+            <th>Author</th>
+            <td id="spec-author">James Clear</td>
+          </tr>
+          <tr>
+            <th>Publisher</th>
+            <td>BookHeaven Publications Ltd.</td>
+          </tr>
+          <tr>
+            <th>Category / Genre</th>
+            <td id="spec-category">Self Help</td>
+          </tr>
+          <tr>
+            <th>Print Length</th>
+            <td id="spec-pages">320 Pages</td>
+          </tr>
+          <tr>
+            <th>Language</th>
+            <td>English</td>
+          </tr>
+          <tr>
+            <th>ISBN-13</th>
+            <td id="spec-isbn">978-0735211292</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Related Suggestions Carousel Grid -->
+      <div class="related-books-section">
+        <div class="section-header">
+          <div class="section-title">
+            <h2>You May Also Like</h2>
+            <p>Check out other books from this genre that you might enjoy reading.</p>
+          </div>
+        </div>
+        <div class="featured-books-grid" id="related-books-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div id="footer-container"></div>
+
+  <!-- JS Engines -->
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/validation.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/books.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/wishlist.js"></script>
+
+  <!-- Details dynamic rendering -->
+  <script>
+    let CURRENT_BOOK = null;
+
+    async function loadBookDetails() {
+      const params = new URLSearchParams(window.location.search);
+      const bookId = parseInt(params.get('id')) || 1; // Default to 1
+
+      Loader.show();
+      try {
+        const book = await API.getBookById(bookId);
+        if (!book) {
+          Toast.error('Book details not found!');
+          setTimeout(() => { window.location.href = 'books.html'; }, 2000);
+          return;
+        }
+
+        CURRENT_BOOK = book;
+
+        // Populate Breadcrumbs & Title details
+        document.getElementById('breadcrumb-category').textContent = book.category;
+        document.getElementById('breadcrumb-title').textContent = book.title;
+        document.title = `${book.title} - BookHeaven`;
+
+        // Image
+        document.getElementById('detail-cover-img').src = book.image;
+        document.getElementById('detail-cover-img').alt = book.title;
+
+        // Content details
+        document.getElementById('detail-category-tag').textContent = book.category;
+        document.getElementById('detail-title').textContent = book.title;
+        document.getElementById('detail-author').innerHTML = `By <span>${book.author}</span>`;
+        document.getElementById('detail-desc').textContent = book.description;
+        document.getElementById('detail-price-val').textContent = `₹${book.price}`;
+
+        // Ratings
+        document.getElementById('detail-rating-num').textContent = book.rating;
+        document.getElementById('detail-rating-stars').innerHTML = Books.renderStars(book.rating);
+
+        // Technical Specs
+        document.getElementById('spec-author').textContent = book.author;
+        document.getElementById('spec-category').textContent = book.category;
+        document.getElementById('spec-pages').textContent = `${250 + (book.id * 15)} Pages`; // Simulated spec length
+        document.getElementById('spec-isbn').textContent = `978-0735${20000 + (book.id * 51)}`;
+
+        // Stock Badge adjustments
+        const stockBadge = document.getElementById('detail-stock-badge');
+        const countTxt = document.getElementById('detail-stock-count');
+        const addCartBtn = document.getElementById('detail-add-cart-btn');
+
+        if (book.stock > 0) {
+          stockBadge.className = 'stock-status in-stock';
+          stockBadge.innerHTML = `<i class="ri-checkbox-circle-line"></i> In Stock`;
+          countTxt.textContent = `(${book.stock} items left)`;
+          addCartBtn.disabled = false;
+        } else {
+          stockBadge.className = 'stock-status out-of-stock';
+          stockBadge.innerHTML = `<i class="ri-close-circle-line"></i> Out of Stock`;
+          countTxt.textContent = `(Temporary unavailable)`;
+          addCartBtn.disabled = true;
+          addCartBtn.textContent = 'Out of Stock';
+        }
+
+        // Wishlist visual button check
+        updateWishlistButtonState(book.id);
+
+        // Render category recommendations
+        await renderSuggestions(book.category, book.id);
+
+      } catch (e) {
+        console.error(e);
+        Toast.error('Error fetching book details.');
+      } finally {
+        Loader.hide();
+      }
+    }
+
+    function updateWishlistButtonState(bookId) {
+      const wishlist = Wishlist.getItems();
+      const inWishlist = wishlist.some(item => item.id === bookId);
+      const btn = document.getElementById('detail-wishlist-btn');
+
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (inWishlist) {
+          btn.style.backgroundColor = 'var(--danger-color)';
+          btn.style.color = 'var(--light-color)';
+          btn.style.borderColor = 'var(--danger-color)';
+          icon.className = 'ri-heart-fill';
+        } else {
+          btn.style.backgroundColor = '';
+          btn.style.color = '';
+          btn.style.borderColor = '';
+          icon.className = 'ri-heart-line';
+        }
+      }
+    }
+
+    async function renderSuggestions(category, currentId) {
+      const grid = document.getElementById('related-books-grid');
+      if (!grid) return;
+
+      const books = await API.getBooks();
+      const filtered = books.filter(b => b.category === category && b.id !== currentId).slice(0, 4);
+
+      if (filtered.length > 0) {
+        Books.renderList(filtered, grid);
+      } else {
+        // Fallback: render any 4 books
+        const fallback = books.filter(b => b.id !== currentId).slice(0, 4);
+        Books.renderList(fallback, grid);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        loadBookDetails();
+
+        // Bind Quantity Adjusters +/- clicks
+        const qtyBox = document.getElementById('qty-input-box');
+        const btnMinus = document.getElementById('qty-minus-btn');
+        const btnPlus = document.getElementById('qty-plus-btn');
+
+        btnMinus.addEventListener('click', () => {
+          let val = parseInt(qtyBox.value);
+          if (val > 1) qtyBox.value = val - 1;
+        });
+
+        btnPlus.addEventListener('click', () => {
+          let val = parseInt(qtyBox.value);
+          if (CURRENT_BOOK && val < CURRENT_BOOK.stock) {
+            qtyBox.value = val + 1;
+          } else {
+            Toast.warning('Cannot purchase more than available stock.');
+          }
+        });
+
+        // Bind Add to Cart
+        document.getElementById('detail-add-cart-btn').addEventListener('click', () => {
+          if (CURRENT_BOOK) {
+            const qty = parseInt(qtyBox.value);
+            Cart.add(CURRENT_BOOK.id, qty);
+          }
+        });
+
+        // Bind Wishlist toggle
+        document.getElementById('detail-wishlist-btn').addEventListener('click', async () => {
+          if (CURRENT_BOOK) {
+            const btn = document.getElementById('detail-wishlist-btn');
+            await Wishlist.toggle(CURRENT_BOOK.id, null);
+            updateWishlistButtonState(CURRENT_BOOK.id);
+          }
+        });
+      }, 150);
+    });
+  </script>
+</body>
+</html>

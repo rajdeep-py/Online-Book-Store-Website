@@ -1,0 +1,126 @@
+/* Centered Auth Card Layout */
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 0;
+  min-height: calc(100vh - var(--header-height) - 300px);
+}
+
+.auth-card {
+  background-color: var(--light-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 3.5rem 3rem;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.auth-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.auth-header p a {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.auth-header p a:hover {
+  text-decoration: underline;
+}
+
+/* Form Helper Options */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.88rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.remember-me input {
+  accent-color: var(--primary-color);
+}
+
+.forgot-password-link {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+.auth-submit-btn {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Password Strength Bar Indicator */
+.password-strength-wrapper {
+  margin-top: 0.5rem;
+}
+
+.password-strength-bar {
+  height: 4px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: var(--transition-fast);
+}
+
+.password-strength-fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--danger-color);
+  transition: var(--transition);
+}
+
+.password-strength-text {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  text-align: right;
+}
+
+/* Form Validation Indicators */
+.form-group.has-error .form-control {
+  border-color: var(--danger-color);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-group.has-success .form-control {
+  border-color: var(--success-color);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.error-message-text {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--danger-color);
+  font-weight: 500;
+  margin-top: 0.35rem;
+}

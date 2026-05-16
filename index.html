@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookHeaven - Premium Online Bookstore</title>
+  
+  <!-- Remix Icons Vector Library -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="assets/css/utilities.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- Dynamic Header Injection Placeholders -->
+  <div id="navbar-container"></div>
+
+  <!-- Page Content -->
+  <main class="page-content">
+    
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-container">
+        <div class="hero-content fade-in">
+          <span class="badge badge-primary mb-3">Welcome to BookHeaven</span>
+          <h1>Explore a Universe of <span>Wisdom & Stories</span></h1>
+          <p>Discover hand-picked books across technology, self-help, business, and fiction. Transform your mind, master new skills, and loss yourself in exceptional writings.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="books.html" class="btn btn-primary">Browse Catalog <i class="ri-arrow-right-line"></i></a>
+            <a href="about.html" class="btn btn-secondary">Learn More</a>
+          </div>
+          <!-- Stats Summary -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>20+</h3>
+              <p>Top Authors</p>
+            </div>
+            <div class="stat-item">
+              <h3>5k+</h3>
+              <p>Happy Readers</p>
+            </div>
+            <div class="stat-item">
+              <h3>100%</h3>
+              <p>Secure Payments</p>
+            </div>
+          </div>
+        </div>
+        <!-- Rotated Premium Cover -->
+        <div class="hero-image-wrapper">
+          <div class="hero-image-bg"></div>
+          <img src="https://images-na.ssl-images-amazon.com/images/I/51-nXsSRfZL._SX328_BO1,204,203,200_.jpg" alt="Featured Cover" class="hero-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- Shipping / Features Cards -->
+    <section class="features-section">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="ri-truck-line"></i></div>
+            <div class="feature-info">
+              <h4>Free Shipping</h4>
+              <p>On orders above ₹1,000</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="ri-shield-check-line"></i></div>
+            <div class="feature-info">
+              <h4>Secure Checkout</h4>
+              <p>100% simulated payments</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="ri-refresh-line"></i></div>
+            <div class="feature-info">
+              <h4>Easy Returns</h4>
+              <p>7-day hassle-free returns</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="ri-customer-service-2-line"></i></div>
+            <div class="feature-info">
+              <h4>24/7 Assistance</h4>
+              <p>Support via live systems</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Genre Categories Section -->
+    <section class="categories-section">
+      <div class="container">
+        <div class="section-header text-center" style="flex-direction: column; align-items: center; margin-bottom: 3.5rem;">
+          <div class="section-title">
+            <h2>Search by Genres</h2>
+            <p>Select your favorite category to refine the catalog search instantly.</p>
+          </div>
+        </div>
+        <div class="categories-grid" id="homepage-categories">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Books Section -->
+    <section class="books-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-title">
+            <h2>Featured Books</h2>
+            <p>Explore some of our hand-picked highly popular literary selections.</p>
+          </div>
+          <a href="books.html" class="btn btn-outline">View All <i class="ri-arrow-right-line"></i></a>
+        </div>
+        <div class="featured-books-grid" id="featured-books">
+          <!-- Cards populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Seasonal Promotional Offer Banner -->
+    <section class="offers-section">
+      <div class="container">
+        <div class="offers-banner">
+          <div class="offers-content">
+            <span class="offers-tag">Special Deal</span>
+            <h3>Supercharge Your Library! Get 10% Flat Discount</h3>
+            <p>Upgrade your knowledge database with our custom discount coupon. Use the code below during checkout on any books purchase.</p>
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+              <span style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; border: 2px dashed rgba(255,255,255,0.4); padding: 0.4rem 1.2rem; border-radius: var(--border-radius-sm); letter-spacing: 2px; color: var(--light-color);">BOOKNEW10</span>
+              <span style="font-size: 0.88rem; color: #a4a7cf;">*Valid on all categories</span>
+            </div>
+            <a href="books.html" class="btn btn-primary" style="background-color: var(--light-color); color: var(--dark-color); box-shadow: none;">Shop Now <i class="ri-shopping-bag-line"></i></a>
+          </div>
+          <div class="offers-image-wrapper">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/41xShCOK5mL._SX379_BO1,204,203,200_.jpg" alt="Dune" class="offers-book-img">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/41r6F2LRf8L._SX323_BO1,204,203,200_.jpg" alt="Money" class="offers-book-img">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Best Sellers Section -->
+    <section class="books-section" style="background-color: var(--bg-color);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-title">
+            <h2>Best Sellers</h2>
+            <p>Our top-rated products purchased by book lovers around the world.</p>
+          </div>
+          <a href="books.html?sort=rating-high-low" class="btn btn-outline">Explore More <i class="ri-arrow-right-line"></i></a>
+        </div>
+        <div class="bestsellers-books-grid" id="bestseller-books">
+          <!-- Cards populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Home Page About Us Section -->
+    <section class="home-about-section">
+      <div class="container">
+        <div class="home-about-grid">
+          
+          <!-- Content Left -->
+          <div class="home-about-content">
+            <span class="badge badge-primary mb-3">About BookHeaven</span>
+            <h2 class="mb-4" style="font-size: 2.2rem; font-weight: 800; line-height: 1.25;">Your Portal to a <span>Universe of Knowledge</span></h2>
+            <p class="home-about-description">Founded in 2026, BookHeaven has been dedicated to cultivating a premium literary haven. We curate the finest literary works across self-help, business management, fiction, and programming technology to satisfy the requirements of global learners, software engineers, and avid readers.</p>
+            
+            <!-- Mission and Vision -->
+            <div class="home-about-mission-vision">
+              <div class="mission-card">
+                <div class="card-icon-title">
+                  <i class="ri-compass-3-line"></i>
+                  <h4>Our Mission</h4>
+                </div>
+                <p>To deliver an elegant, accessible, and seamless book-purchasing environment that sparks lifelong reading habits and academic excellence worldwide.</p>
+              </div>
+              <div class="vision-card">
+                <div class="card-icon-title">
+                  <i class="ri-eye-line"></i>
+                  <h4>Our Vision</h4>
+                </div>
+                <p>To empower global minds by becoming the primary digital hub where readers of all backgrounds can explore premium literary coordinates effortlessly.</p>
+              </div>
+            </div>
+
+            <!-- Partners Sponsors -->
+            <div class="partners-box">
+              <h5 class="partners-title">Trusted Publishing Partners</h5>
+              <div class="partners-logos">
+                <span class="partner-logo"><i class="ri-quill-pen-line"></i> Pearson</span>
+                <span class="partner-logo"><i class="ri-terminal-box-line"></i> O'Reilly</span>
+                <span class="partner-logo"><i class="ri-book-3-line"></i> Penguin</span>
+                <span class="partner-logo"><i class="ri-bank-line"></i> Oxford Press</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image Right -->
+          <div class="home-about-image">
+            <img src="https://images.unsplash.com/photo-1513001900722-370f803f498d?auto=format&fit=crop&w=500&h=600" alt="BookHeaven Headquarters" class="home-about-img-card">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Slider -->
+    <section class="testimonials-section">
+      <div class="container">
+        <div class="section-header text-center" style="flex-direction: column; align-items: center; margin-bottom: 4rem;">
+          <div class="section-title">
+            <h2>Customer Reviews</h2>
+            <p>Check out what our dedicated readers have to say about their purchasing experience.</p>
+          </div>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <i class="ri-double-quotes-r quote-icon"></i>
+            <p class="testimonial-content">"The bookstore is exceptionally designed! The navigation is smooth and purchasing my tech books was done in seconds. The package arrived on time."</p>
+            <div class="testimonial-user">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&h=100" alt="Sarah" class="testimonial-avatar">
+              <div class="testimonial-user-info">
+                <h5>Sarah Jenkins</h5>
+                <p>Software Engineer</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <i class="ri-double-quotes-r quote-icon"></i>
+            <p class="testimonial-content">"Clean code is my absolute favorite, and getting the book along with a discount code made it a stellar bargain. Highly recommended bookstore!"</p>
+            <div class="testimonial-user">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100" alt="Marcus" class="testimonial-avatar">
+              <div class="testimonial-user-info">
+                <h5>Marcus Aurelius</h5>
+                <p>Academic Researcher</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <i class="ri-double-quotes-r quote-icon"></i>
+            <p class="testimonial-content">"Finding high quality books in India with ₹ pricing is great, but their overall client dashboard and order history tracking is what truly wins me over."</p>
+            <div class="testimonial-user">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100" alt="Priya" class="testimonial-avatar">
+              <div class="testimonial-user-info">
+                <h5>Priya Sharma</h5>
+                <p>Professional Writer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Dynamic Footer placeholder -->
+  <div id="footer-container"></div>
+
+  <!-- JavaScript Engines -->
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/validation.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/books.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/wishlist.js"></script>
+
+  <!-- Inline Home Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dynamic loading checks
+      setTimeout(async () => {
+        const books = await API.getBooks();
+        const categories = await API.getCategories();
+
+        const catContainer = document.getElementById('homepage-categories');
+        const featContainer = document.getElementById('featured-books');
+        const bestContainer = document.getElementById('bestseller-books');
+
+        // 1. Render Categories list
+        if (catContainer) {
+          catContainer.innerHTML = categories.map(cat => `
+            <div class="category-card" onclick="window.location.href='books.html?category=${encodeURIComponent(cat.name)}'">
+              <div class="category-card-icon"><i class="${cat.icon}"></i></div>
+              <h4>${cat.name}</h4>
+              <p>${cat.count} Books available</p>
+            </div>
+          `).join('');
+        }
+
+        // 2. Render skeletons
+        Books.renderSkeletons(featContainer, 4);
+        Books.renderSkeletons(bestContainer, 4);
+
+        // 3. Render real books cards
+        setTimeout(() => {
+          // Select books
+          const featured = books.slice(0, 4);
+          const bestsellers = books.slice(10, 14);
+
+          Books.renderList(featured, featContainer);
+          Books.renderList(bestsellers, bestContainer);
+        }, 500);
+
+      }, 100);
+    });
+  </script>
+</body>
+</html>

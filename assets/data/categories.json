@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Self Help",
+    "slug": "self-help",
+    "icon": "ri-mind-map",
+    "description": "Unlock your potential and cultivate life-changing habits.",
+    "count": 4
+  },
+  {
+    "id": 2,
+    "name": "Technology",
+    "slug": "technology",
+    "icon": "ri-code-s-slash-line",
+    "description": "Master programming, design systems, and software craft.",
+    "count": 4
+  },
+  {
+    "id": 3,
+    "name": "Business",
+    "slug": "business",
+    "icon": "ri-line-chart-line",
+    "description": "Learn startup strategies, investing rules, and money mechanics.",
+    "count": 5
+  },
+  {
+    "id": 4,
+    "name": "Sci-Fi",
+    "slug": "sci-fi",
+    "icon": "ri-rocket-2-line",
+    "description": "Explore galaxies, cyberpunk cities, and far futures.",
+    "count": 4
+  },
+  {
+    "id": 5,
+    "name": "Fiction",
+    "slug": "fiction",
+    "icon": "ri-book-open-line",
+    "description": "Lose yourself in immersive stories and timeless classics.",
+    "count": 3
+  }
+]

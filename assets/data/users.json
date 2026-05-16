@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "Password123",
+    "phone": "+1 234 567 890",
+    "avatar": "assets/images/users/avatar1.jpg",
+    "addresses": [
+      {
+        "id": 101,
+        "tag": "Home",
+        "fullName": "John Doe",
+        "street": "123 Library Lane",
+        "city": "Booktown",
+        "state": "NY",
+        "zipCode": "10001",
+        "country": "United States",
+        "phone": "+1 234 567 890",
+        "isDefault": true
+      },
+      {
+        "id": 102,
+        "tag": "Office",
+        "fullName": "John Doe",
+        "street": "456 Publisher Parkway",
+        "city": "Readville",
+        "state": "CA",
+        "zipCode": "94016",
+        "country": "United States",
+        "phone": "+1 987 654 321",
+        "isDefault": false
+      }
+    ],
+    "orders": [
+      {
+        "orderId": "ORD-2026-98745",
+        "date": "2026-05-10",
+        "status": "Delivered",
+        "total": 1397,
+        "items": [
+          { "id": 1, "title": "Atomic Habits", "price": 499, "quantity": 1 },
+          { "id": 3, "title": "Clean Code", "price": 899, "quantity": 1 }
+        ]
+      },
+      {
+        "orderId": "ORD-2026-10293",
+        "date": "2026-05-15",
+        "status": "Shipped",
+        "total": 948,
+        "items": [
+          { "id": 11, "title": "The Psychology of Money", "price": 399, "quantity": 1 },
+          { "id": 8, "title": "Project Hail Mary", "price": 549, "quantity": 1 }
+        ]
+      }
+    ]
+  }
+]

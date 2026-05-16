@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Books Catalog - BookHeaven Bookstore</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/books.css">
+  <link rel="stylesheet" href="assets/css/utilities.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <main class="page-content">
+    
+    <!-- Breadcrumbs Navigation -->
+    <div class="breadcrumb-wrapper">
+      <div class="container">
+        <ul class="breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li>Browse Catalog</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Catalog Main layout -->
+    <section class="container" style="padding-bottom: 5rem;">
+      <div class="catalog-wrapper">
+        
+        <!-- Sidebar filters placeholder -->
+        <div id="sidebar-filter-placeholder"></div>
+
+        <!-- Main Products Display column -->
+        <div class="catalog-main-content">
+          
+          <!-- Results and Sorting Header Bar -->
+          <div class="catalog-header">
+            <div class="results-count">
+              Showing <span id="results-count-number">0</span> books
+            </div>
+            
+            <div class="catalog-actions">
+              <label style="font-size: 0.88rem; font-weight: 600; color: var(--text-color);">Sort By:</label>
+              <select class="sort-select" id="catalog-sort-select">
+                <option value="default">Default Features</option>
+                <option value="price-low-high">Price: Low to High</option>
+                <option value="price-high-low">Price: High to Low</option>
+                <option value="rating-high-low">Customer Rating</option>
+                <option value="alphabetical">Title: A to Z</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Active filters bar -->
+          <div class="active-filters-bar" id="active-filters-container" style="display: none;">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Books Grid layout -->
+          <div class="catalog-books-grid" id="catalog-books-grid">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Pagination Bar -->
+          <div class="pagination" id="catalog-pagination">
+            <!-- Dynamically populated -->
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-container"></div>
+
+  <!-- JS Engines -->
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/validation.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/books.js"></script>
+  <script src="assets/js/search.js"></script>
+  <script src="assets/js/filter.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/wishlist.js"></script>
+
+  <!-- Interactive Catalog Logic -->
+  <script>
+    let ALL_BOOKS = [];
+    
+    // Core Filter State
+    const FilterState = {
+      categories: [],
+      maxPrice: 2000,
+      minPrice: 0,
+      minRating: 0,
+      sortBy: 'default',
+      searchQuery: '',
+      page: 1,
+      limit: 6 // 6 items per page
+    };
+
+    // Load Sidebar HTML statically then bind
+    async function loadSidebar() {
+      const ph = document.getElementById('sidebar-filter-placeholder');
+      if (!ph) return;
+
+      if (window.location.protocol === 'file:') {
+        ph.innerHTML = getSidebarHTML();
+        initSidebarActions();
+      } else {
+        try {
+          const response = await fetch('components/sidebar.html');
+          ph.innerHTML = await response.text();
+          initSidebarActions();
+        } catch (e) {
+          ph.innerHTML = getSidebarHTML();
+          initSidebarActions();
+        }
+      }
+    }
+
+    function getSidebarHTML() {
+      return `
+        <aside class="filter-sidebar">
+          <div class="filter-group">
+            <h4 class="filter-title">Refine Search</h4>
+            <div style="position: relative;">
+              <input type="text" id="sidebar-search-input" class="form-control" placeholder="Title, author..." style="padding-left: 2.2rem;">
+              <i class="ri-search-line" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h4 class="filter-title">Genres & Categories</h4>
+            <ul class="filter-list" id="sidebar-categories-list"></ul>
+          </div>
+          <div class="filter-group">
+            <h4 class="filter-title">Price Range (₹)</h4>
+            <div class="price-range-slider">
+              <input type="range" class="price-slider-input" id="sidebar-price-range" min="0" max="2000" step="50" value="2000">
+              <div class="price-range-labels"><span>₹0</span><span>₹2,000+</span></div>
+              <div class="price-inputs">
+                <input type="number" id="price-min" value="0" min="0" max="2000">
+                <span>to</span>
+                <input type="number" id="price-max" value="2000" min="0" max="2000">
+              </div>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h4 class="filter-title">Customer Reviews</h4>
+            <ul class="filter-list">
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="radio" name="rating-filter" value="4" class="rating-radio">
+                  <div class="rating-stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-line"></i></div>
+                  <span>& Up</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="radio" name="rating-filter" value="3" class="rating-radio">
+                  <div class="rating-stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-line"></i><i class="ri-star-line"></i></div>
+                  <span>& Up</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="radio" name="rating-filter" value="all" class="rating-radio" checked>
+                  <span>All Ratings</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+          <button class="btn btn-secondary" id="reset-filters-btn" style="width: 100%; font-size: 0.88rem; font-weight: 700;">
+            <i class="ri-refresh-line"></i> Reset Filters
+          </button>
+        </aside>
+      `;
+    }
+
+    // Populate and bind events
+    async function initSidebarActions() {
+      const categories = await API.getCategories();
+      const sidebarCatList = document.getElementById('sidebar-categories-list');
+      
+      if (sidebarCatList) {
+        sidebarCatList.innerHTML = categories.map(cat => `
+          <li>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" value="${cat.name}" class="category-checkbox">
+              <span>${cat.name}</span>
+              <span class="filter-count">${cat.count}</span>
+            </label>
+          </li>
+        `).join('');
+      }
+
+      // Check URL query variables on start
+      const searchParam = Search.getUrlParam();
+      const catParam = new URLSearchParams(window.location.search).get('category');
+      const sortParam = new URLSearchParams(window.location.search).get('sort');
+
+      if (searchParam) {
+        FilterState.searchQuery = searchParam;
+        const sInput = document.getElementById('sidebar-search-input');
+        if (sInput) sInput.value = searchParam;
+      }
+
+      if (catParam) {
+        FilterState.categories.push(catParam);
+        document.querySelectorAll('.category-checkbox').forEach(cb => {
+          if (cb.value.toLowerCase() === catParam.toLowerCase()) {
+            cb.checked = true;
+          }
+        });
+      }
+
+      if (sortParam) {
+        FilterState.sortBy = sortParam;
+        const sortSel = document.getElementById('catalog-sort-select');
+        if (sortSel) sortSel.value = sortParam;
+      }
+
+      // Bind Listeners
+      // 1. Search Query input
+      const sidebarSearch = document.getElementById('sidebar-search-input');
+      sidebarSearch.addEventListener('input', (e) => {
+        FilterState.searchQuery = e.target.value;
+        FilterState.page = 1;
+        updateCatalog();
+      });
+
+      // 2. Categories checkbox clicks
+      document.querySelectorAll('.category-checkbox').forEach(cb => {
+        cb.addEventListener('change', () => {
+          if (cb.checked) {
+            FilterState.categories.push(cb.value);
+          } else {
+            FilterState.categories = FilterState.categories.filter(c => c !== cb.value);
+          }
+          FilterState.page = 1;
+          updateCatalog();
+        });
+      });
+
+      // 3. Price slider range updates
+      const slider = document.getElementById('sidebar-price-range');
+      const pMin = document.getElementById('price-min');
+      const pMax = document.getElementById('price-max');
+
+      const handlePriceChange = () => {
+        FilterState.maxPrice = parseInt(pMax.value);
+        FilterState.minPrice = parseInt(pMin.value);
+        slider.value = FilterState.maxPrice;
+        FilterState.page = 1;
+        updateCatalog();
+      };
+
+      slider.addEventListener('input', (e) => {
+        pMax.value = e.target.value;
+        handlePriceChange();
+      });
+
+      pMin.addEventListener('change', handlePriceChange);
+      pMax.addEventListener('change', handlePriceChange);
+
+      // 4. Rating filter selections
+      document.querySelectorAll('.rating-radio').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+          if (radio.checked) {
+            FilterState.minRating = radio.value === 'all' ? 0 : parseInt(radio.value);
+            FilterState.page = 1;
+            updateCatalog();
+          }
+        });
+      });
+
+      // 5. Reset Filters button
+      document.getElementById('reset-filters-btn').addEventListener('click', () => {
+        FilterState.categories = [];
+        FilterState.maxPrice = 2000;
+        FilterState.minPrice = 0;
+        FilterState.minRating = 0;
+        FilterState.searchQuery = '';
+        FilterState.sortBy = 'default';
+        FilterState.page = 1;
+
+        // Reset sidebar UI elements
+        sidebarSearch.value = '';
+        document.querySelectorAll('.category-checkbox').forEach(cb => cb.checked = false);
+        slider.value = 2000;
+        pMin.value = 0;
+        pMax.value = 2000;
+        document.querySelectorAll('.rating-radio').forEach(r => r.checked = r.value === 'all');
+        document.getElementById('catalog-sort-select').value = 'default';
+
+        updateCatalog();
+      });
+
+      // Run initial render
+      updateCatalog();
+    }
+
+    // Filter, Sort, and Paginate items
+    function updateCatalog() {
+      const grid = document.getElementById('catalog-books-grid');
+      const countEl = document.getElementById('results-count-number');
+      const pag = document.getElementById('catalog-pagination');
+      const filtersBar = document.getElementById('active-filters-container');
+
+      if (!grid) return;
+
+      // Render skeleton loading
+      Books.renderSkeletons(grid, FilterState.limit);
+
+      setTimeout(() => {
+        // 1. Filter books array
+        let result = Filter.apply(ALL_BOOKS, FilterState);
+
+        // 2. Sort books
+        result = Filter.sort(result, FilterState.sortBy);
+
+        // 3. Render active filters badges list
+        renderActiveFilterBadges(filtersBar);
+
+        // 4. Recalculate Paginations
+        const totalItems = result.length;
+        countEl.textContent = totalItems;
+
+        const totalPages = Math.ceil(totalItems / FilterState.limit);
+        const startIndex = (FilterState.page - 1) * FilterState.limit;
+        const endIndex = startIndex + FilterState.limit;
+        const paginatedResult = result.slice(startIndex, endIndex);
+
+        // 5. Render products grid
+        Books.renderList(paginatedResult, grid);
+
+        // 6. Render pagination pages
+        renderPaginationButtons(pag, totalPages);
+
+      }, 400);
+    }
+
+    function renderActiveFilterBadges(bar) {
+      if (!bar) return;
+      
+      const badges = [];
+
+      if (FilterState.searchQuery) {
+        badges.push(`Search: "${FilterState.searchQuery}"`);
+      }
+      FilterState.categories.forEach(cat => badges.push(cat));
+      if (FilterState.maxPrice < 2000) {
+        badges.push(`Max: ₹${FilterState.maxPrice}`);
+      }
+      if (FilterState.minRating > 0) {
+        badges.push(`${FilterState.minRating}★ & Up`);
+      }
+
+      if (badges.length > 0) {
+        bar.style.display = 'flex';
+        bar.innerHTML = badges.map(badge => `
+          <span class="active-filter-badge">
+            ${badge}
+            <i class="ri-close-line" onclick="removeSingleFilter('${badge}')"></i>
+          </span>
+        `).join('') + `<button class="clear-filters-btn" onclick="document.getElementById('reset-filters-btn').click()">Clear All</button>`;
+      } else {
+        bar.style.display = 'none';
+      }
+    }
+
+    // Remove a single active filter parameter
+    window.removeSingleFilter = function(filterVal) {
+      if (filterVal.startsWith('Search:')) {
+        FilterState.searchQuery = '';
+        const searchInput = document.getElementById('sidebar-search-input');
+        if (searchInput) searchInput.value = '';
+      } else if (filterVal.startsWith('Max:')) {
+        FilterState.maxPrice = 2000;
+        const slider = document.getElementById('sidebar-price-range');
+        const pMax = document.getElementById('price-max');
+        if (slider) slider.value = 2000;
+        if (pMax) pMax.value = 2000;
+      } else if (filterVal.endsWith('★ & Up')) {
+        FilterState.minRating = 0;
+        document.querySelectorAll('.rating-radio').forEach(r => r.checked = r.value === 'all');
+      } else {
+        FilterState.categories = FilterState.categories.filter(c => c !== filterVal);
+        document.querySelectorAll('.category-checkbox').forEach(cb => {
+          if (cb.value === filterVal) cb.checked = false;
+        });
+      }
+      FilterState.page = 1;
+      updateCatalog();
+    };
+
+    function renderPaginationButtons(container, totalPages) {
+      if (!container) return;
+
+      if (totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+      }
+
+      let pagHTML = `
+        <div class="page-item ${FilterState.page === 1 ? 'disabled' : ''}" onclick="changePage(${FilterState.page - 1})">
+          <i class="ri-arrow-left-s-line"></i>
+        </div>
+      `;
+
+      for (let i = 1; i <= totalPages; i++) {
+        pagHTML += `
+          <div class="page-item ${FilterState.page === i ? 'active' : ''}" onclick="changePage(${i})">
+            ${i}
+          </div>
+        `;
+      }
+
+      pagHTML += `
+        <div class="page-item ${FilterState.page === totalPages ? 'disabled' : ''}" onclick="changePage(${FilterState.page + 1})">
+          <i class="ri-arrow-right-s-line"></i>
+        </div>
+      `;
+
+      container.innerHTML = pagHTML;
+    }
+
+    window.changePage = function(pageNum) {
+      FilterState.page = pageNum;
+      updateCatalog();
+      window.scrollTo({ top: 150, behavior: 'smooth' });
+    };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      ALL_BOOKS = await API.getBooks();
+
+      // Load Sidebar then update list
+      await loadSidebar();
+
+      // Bind sorting dropdown change
+      const sortSel = document.getElementById('catalog-sort-select');
+      if (sortSel) {
+        sortSel.addEventListener('change', (e) => {
+          FilterState.sortBy = e.target.value;
+          FilterState.page = 1;
+          updateCatalog();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

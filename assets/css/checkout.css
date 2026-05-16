@@ -1,0 +1,169 @@
+/* Checkout Page Layout */
+.checkout-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 2.5rem;
+  padding: 3rem 0;
+}
+
+/* Shipping and Payment Forms */
+.checkout-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.checkout-card {
+  background-color: var(--light-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.checkout-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--dark-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.checkout-card-title i {
+  color: var(--primary-color);
+  font-size: 1.4rem;
+}
+
+/* Form Row Helper */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* Payment Method Choices */
+.payment-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.payment-method-card {
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.payment-method-card i {
+  font-size: 2rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.payment-method-card span {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.payment-method-card input[type="radio"] {
+  display: none;
+}
+
+.payment-method-card:hover {
+  border-color: rgba(108, 99, 255, 0.5);
+}
+
+.payment-method-card.active {
+  border-color: var(--primary-color);
+  background-color: var(--primary-light);
+}
+
+.payment-method-card.active i {
+  color: var(--primary-color);
+}
+
+.payment-method-card.active span {
+  color: var(--primary-color);
+}
+
+/* Card Information Box */
+.card-details-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+/* Compact Order Review (Right Side) */
+.checkout-order-review {
+  height: fit-content;
+  position: sticky;
+  top: calc(var(--header-height) + 20px);
+}
+
+.review-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 240px;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+  padding-right: 0.5rem;
+}
+
+.review-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.review-item-img {
+  width: 50px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.review-item-info {
+  flex-grow: 1;
+}
+
+.review-item-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--dark-color);
+  margin-bottom: 0.1rem;
+  /* Line clamp */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.review-item-qty-price {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.review-item-price {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+  margin-left: auto;
+}

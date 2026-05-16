@@ -1,0 +1,79 @@
+<aside class="filter-sidebar">
+  <!-- Search Filter Group -->
+  <div class="filter-group">
+    <h4 class="filter-title">Refine Search</h4>
+    <div style="position: relative;">
+      <input type="text" id="sidebar-search-input" class="form-control" placeholder="Title, author, keyword..." style="padding-left: 2rem;">
+      <i class="ri-search-line" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+    </div>
+  </div>
+
+  <!-- Categories Filter Group -->
+  <div class="filter-group">
+    <h4 class="filter-title">Genres & Categories</h4>
+    <ul class="filter-list" id="sidebar-categories-list">
+      <!-- Loaded dynamically via categories.json -->
+    </ul>
+  </div>
+
+  <!-- Price Range Filter Group -->
+  <div class="filter-group">
+    <h4 class="filter-title">Price Range (₹)</h4>
+    <div class="price-range-slider">
+      <input type="range" class="price-slider-input" id="sidebar-price-range" min="0" max="2000" step="50" value="2000">
+      <div class="price-range-labels">
+        <span>₹0</span>
+        <span>₹2,000+</span>
+      </div>
+      <div class="price-inputs">
+        <input type="number" id="price-min" value="0" min="0" max="2000">
+        <span>to</span>
+        <input type="number" id="price-max" value="2000" min="0" max="2000">
+      </div>
+    </div>
+  </div>
+
+  <!-- Ratings Filter Group -->
+  <div class="filter-group">
+    <h4 class="filter-title">Customer Reviews</h4>
+    <ul class="filter-list">
+      <li>
+        <label class="filter-checkbox-label">
+          <input type="radio" name="rating-filter" value="4" class="rating-radio">
+          <div class="rating-stars">
+            <i class="ri-star-fill"></i>
+            <i class="ri-star-fill"></i>
+            <i class="ri-star-fill"></i>
+            <i class="ri-star-fill"></i>
+            <i class="ri-star-line"></i>
+          </div>
+          <span>& Up</span>
+        </label>
+      </li>
+      <li>
+        <label class="filter-checkbox-label">
+          <input type="radio" name="rating-filter" value="3" class="rating-radio">
+          <div class="rating-stars">
+            <i class="ri-star-fill"></i>
+            <i class="ri-star-fill"></i>
+            <i class="ri-star-fill"></i>
+            <i class="ri-star-line"></i>
+            <i class="ri-star-line"></i>
+          </div>
+          <span>& Up</span>
+        </label>
+      </li>
+      <li>
+        <label class="filter-checkbox-label">
+          <input type="radio" name="rating-filter" value="all" class="rating-radio" checked>
+          <span>All Ratings</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Reset Button Group -->
+  <button class="btn btn-secondary" id="reset-filters-btn" style="width: 100%; font-size: 0.88rem; font-weight: 700;">
+    <i class="ri-refresh-line"></i> Reset Filters
+  </button>
+</aside>

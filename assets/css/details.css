@@ -1,0 +1,255 @@
+/* Book Details Layout */
+.details-wrapper {
+  padding: 3rem 0;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+  background-color: var(--light-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem;
+}
+
+/* Book Image Gallery */
+.book-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.book-main-image-card {
+  background-color: var(--bg-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  padding: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.book-main-image-card img {
+  max-height: 480px;
+  object-fit: contain;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.book-main-image-card img:hover {
+  transform: scale(1.03);
+}
+
+/* Book Details Content */
+.book-details-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-details-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.book-details-category {
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.book-details-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--dark-color);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.book-details-author {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.book-details-author span {
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.book-rating-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.book-reviews-count {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* Price & Stock Section */
+.book-price-stock-box {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.book-details-price {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+/* Stock Status */
+.stock-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.stock-status.in-stock {
+  color: var(--success-color);
+}
+
+.stock-status.out-of-stock {
+  color: var(--danger-color);
+}
+
+.stock-count-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+/* Product Description */
+.book-details-description {
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+/* Action Controls (Quantity, Cart, Wishlist) */
+.book-details-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Quantity Adjuster */
+.quantity-adjuster {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-color);
+  padding: 0.25rem;
+}
+
+.qty-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  font-size: 1.1rem;
+  color: var(--dark-color);
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.qty-btn:hover {
+  background-color: rgba(26, 26, 36, 0.05);
+}
+
+.qty-input {
+  width: 44px;
+  border: none;
+  background: none;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark-color);
+}
+
+.details-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+.details-add-to-cart {
+  flex-grow: 1;
+}
+
+/* Book Technical Specs Table */
+.specs-section {
+  background-color: var(--light-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem;
+  margin-bottom: 4rem;
+}
+
+.specs-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.specs-table tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.specs-table tr:last-child {
+  border-bottom: none;
+}
+
+.specs-table th, .specs-table td {
+  padding: 1.2rem 1.5rem;
+  text-align: left;
+}
+
+.specs-table th {
+  font-weight: 700;
+  color: var(--dark-color);
+  width: 30%;
+  font-size: 0.95rem;
+}
+
+.specs-table td {
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+/* Related Suggestions Section */
+.related-books-section {
+  margin-bottom: 4rem;
+}
