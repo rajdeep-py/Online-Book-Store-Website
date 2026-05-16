@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="assets/css/utilities.css">
   <link rel="stylesheet" href="assets/css/animations.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/contact.css">
 </head>
 <body>
 
@@ -38,50 +39,56 @@
         <p class="text-muted" style="max-width: 600px; margin: 0 auto;">Have questions regarding a specific book, or need help with a refund? Send us an inquiry message directly.</p>
       </div>
 
-      <div class="grid-2" style="grid-template-columns: 0.8fr 1.2fr; gap: 4rem;">
+      <div class="contact-layout-grid">
         
-        <!-- Left: Contacts Information -->
-        <div class="fade-in" style="display: flex; flex-direction: column; gap: 2rem;">
+        <!-- Left: Contacts Information Panel -->
+        <div class="contact-info-panel fade-in">
           
-          <div class="feature-card" style="padding: 1.5rem; gap: 1rem;">
-            <div class="feature-icon" style="flex-shrink: 0;"><i class="ri-map-pin-2-line"></i></div>
-            <div class="feature-info">
-              <h4 style="margin-bottom: 0.25rem;">Physical Location</h4>
+          <!-- Mock Map Card -->
+          <div class="mock-map-box">
+            <i class="ri-map-pin-5-fill map-pin"></i>
+            <div class="map-overlay">BookHeaven HQ - New York</div>
+          </div>
+
+          <div class="contact-glass-card">
+            <div class="contact-card-icon"><i class="ri-map-pin-2-line"></i></div>
+            <div class="contact-card-content">
+              <h4>Physical Headquarters</h4>
               <p>123 Library Lane, Booktown, New York, NY 10001, USA</p>
             </div>
           </div>
 
-          <div class="feature-card" style="padding: 1.5rem; gap: 1rem;">
-            <div class="feature-icon" style="flex-shrink: 0;"><i class="ri-mail-send-line"></i></div>
-            <div class="feature-info">
-              <h4 style="margin-bottom: 0.25rem;">Email Communication</h4>
-              <p><a href="mailto:support@bookheaven.com" style="color: var(--text-color);">support@bookheaven.com</a></p>
+          <div class="contact-glass-card">
+            <div class="contact-card-icon"><i class="ri-mail-send-line"></i></div>
+            <div class="contact-card-content">
+              <h4>Email Communication</h4>
+              <p><a href="mailto:support@bookheaven.com">support@bookheaven.com</a></p>
             </div>
           </div>
 
-          <div class="feature-card" style="padding: 1.5rem; gap: 1rem;">
-            <div class="feature-icon" style="flex-shrink: 0;"><i class="ri-phone-line"></i></div>
-            <div class="feature-info">
-              <h4 style="margin-bottom: 0.25rem;">Phone Hotline</h4>
-              <p><a href="tel:+1234567890" style="color: var(--text-color);">+1 (234) 567-890</a></p>
+          <div class="contact-glass-card">
+            <div class="contact-card-icon"><i class="ri-phone-line"></i></div>
+            <div class="contact-card-content">
+              <h4>24/7 Phone Hotline</h4>
+              <p><a href="tel:+1234567890">+1 (234) 567-890</a></p>
             </div>
           </div>
 
           <!-- Social block -->
-          <div style="margin-top: 1.5rem;">
-            <h4 class="mb-3" style="font-family: var(--font-heading); font-weight: 700;">Join Our Networks</h4>
-            <div class="d-flex gap-2">
-              <a href="#" class="social-btn" title="Facebook"><i class="ri-facebook-fill"></i></a>
-              <a href="#" class="social-btn" title="Twitter"><i class="ri-twitter-fill"></i></a>
-              <a href="#" class="social-btn" title="Instagram"><i class="ri-instagram-line"></i></a>
-              <a href="#" class="social-btn" title="YouTube"><i class="ri-youtube-fill"></i></a>
+          <div class="social-section">
+            <h4 class="social-title"><i class="ri-share-line"></i> Join Our Networks</h4>
+            <div class="social-grid">
+              <a href="#" class="social-pill" title="Facebook"><i class="ri-facebook-fill"></i></a>
+              <a href="#" class="social-pill" title="Twitter"><i class="ri-twitter-fill"></i></a>
+              <a href="#" class="social-pill" title="Instagram"><i class="ri-instagram-line"></i></a>
+              <a href="#" class="social-pill" title="YouTube"><i class="ri-youtube-fill"></i></a>
             </div>
           </div>
 
         </div>
 
         <!-- Right: Inquiry Form Card -->
-        <div class="profile-content-card fade-in" style="box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+        <div class="support-form-card fade-in">
           <form id="contact-inquiry-form" novalidate>
             
             <div class="form-group">
@@ -104,7 +111,7 @@
               <textarea id="c-message" class="form-control" rows="5" placeholder="Type your message details here..." required style="resize: vertical; font-family: inherit; font-size: 0.9rem; line-height: 1.5;"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem;">
+            <button type="submit" class="btn btn-primary contact-submit-btn">
               Send Inquiry Message <i class="ri-send-plane-line"></i>
             </button>
 
