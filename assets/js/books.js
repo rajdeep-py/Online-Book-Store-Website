@@ -106,6 +106,7 @@ const Books = {
     // Add to Cart buttons
     container.querySelectorAll('.add-to-cart-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent card navigation
         const id = parseInt(btn.getAttribute('data-id'));
         if (window.Cart) {
           window.Cart.add(id);
@@ -118,11 +119,25 @@ const Books = {
     // Wishlist togglers
     container.querySelectorAll('.wishlist-toggle-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent card navigation
         const id = parseInt(btn.getAttribute('data-id'));
         if (window.Wishlist) {
           window.Wishlist.toggle(id, btn);
         } else {
           console.error("Wishlist module is not loaded!");
+        }
+      });
+    });
+
+    // Entire Card Click Redirect (excluding interactive buttons/anchors)
+    container.querySelectorAll('.book-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const isInteractive = e.target.closest('.add-to-cart-btn') || 
+                              e.target.closest('.wishlist-toggle-btn') ||
+                              e.target.closest('a');
+        if (!isInteractive) {
+          const id = card.getAttribute('data-id');
+          window.location.href = `book-details.html?id=${id}`;
         }
       });
     });
