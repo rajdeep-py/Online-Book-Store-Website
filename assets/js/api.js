@@ -271,6 +271,37 @@ const MOCK_USERS = [
   }
 ];
 
+const BASE_URL = 'http://localhost:8080/book_store_backend';
+
+function mapBackendBook(book) {
+  if (book.title) return book; // Already in frontend format
+
+  let imagePath = 'assets/images/books/default-book.jpg';
+  if (book.book_photo) {
+    if (book.book_photo.startsWith('http')) {
+      imagePath = book.book_photo;
+    } else {
+      imagePath = `${BASE_URL}/${book.book_photo}`;
+    }
+  } else if (book.book_name) {
+    // Attempt fallback based on book name
+    const slug = book.book_name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    imagePath = `assets/images/books/${slug}.jpg`;
+  }
+
+  return {
+    id: book.book_id,
+    title: book.book_name,
+    author: book.author_name,
+    category: book.book_category || 'General',
+    price: book.final_selling_price || book.price,
+    rating: book.rating || 4.5,
+    stock: book.stock_amount || 0,
+    image: imagePath,
+    description: book.book_description || ''
+  };
+}
+
 const API = {
   // Check if running on file:// protocol (local file)
   isLocalProtocol() {
@@ -278,15 +309,23 @@ const API = {
   },
 
   async getBooks() {
-    if (this.isLocalProtocol()) {
-      return MOCK_BOOKS;
-    }
     try {
-      const response = await fetch('assets/data/books.json');
-      return await response.json();
+      const response = await fetch(`${BASE_URL}/api/books`);
+      if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+      const data = await response.json();
+      const backendBooks = data.items || [];
+      return backendBooks.map(mapBackendBook);
     } catch (e) {
-      console.warn("Fetch failed, falling back to local mock data.", e);
-      return MOCK_BOOKS;
+      console.warn("Backend API fetch failed, falling back to local files or mock.", e);
+      if (this.isLocalProtocol()) {
+        return MOCK_BOOKS;
+      }
+      try {
+        const response = await fetch('assets/data/books.json');
+        return await response.json();
+      } catch (err) {
+        return MOCK_BOOKS;
+      }
     }
   },
 
