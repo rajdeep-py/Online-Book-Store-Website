@@ -36,8 +36,12 @@
       <!-- Left Column: User Sidebar Navigation -->
       <aside class="profile-sidebar">
         <div class="profile-user-summary">
-          <div class="profile-avatar-wrapper">
+          <div class="profile-avatar-wrapper" style="position: relative; cursor: pointer;" onclick="document.getElementById('profile-photo-upload').click()">
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150" alt="Avatar" class="profile-avatar" id="sidebar-user-avatar">
+            <div style="position: absolute; bottom: 0; right: 0; background: var(--primary); color: white; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+              <i class="ri-camera-line"></i>
+            </div>
+            <input type="file" id="profile-photo-upload" accept="image/*" style="display: none;">
           </div>
           <h4 class="profile-user-name" id="sidebar-user-name">Guest User</h4>
           <p class="profile-user-email" id="sidebar-user-email">john@example.com</p>
@@ -76,22 +80,15 @@
               <input type="text" id="profile-phone" class="form-control" placeholder="+1 234 567 890">
             </div>
 
-            <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
+            <div class="form-group" style="margin-top: 1rem;">
+              <label for="profile-address">Saved Address</label>
+              <textarea id="profile-address" class="form-control" rows="3" placeholder="Enter your full shipping address"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 1.5rem;">
               <i class="ri-save-line"></i> Save Changes
             </button>
           </form>
-        </div>
-
-        <!-- Address Book Card -->
-        <div class="profile-content-card">
-          <div class="profile-card-title">
-            <span>Saved Addresses</span>
-          </div>
-          
-          <!-- Addresses Grid list -->
-          <div class="addresses-grid" id="profile-addresses-grid">
-            <!-- Dynamically populated via profile.js -->
-          </div>
         </div>
 
       </div>

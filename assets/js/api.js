@@ -418,6 +418,17 @@ const API = {
     return sessionId ? `${url};jsessionid=${sessionId}` : url;
   },
 
+  getImageUrl(path) {
+    if (!path) return null;
+    if (path.startsWith('http') || path.startsWith('data:image')) return path;
+    try {
+      const urlObj = new URL(BASE_URL);
+      return urlObj.origin + (path.startsWith('/') ? path : '/' + path);
+    } catch(e) {
+      return path;
+    }
+  },
+
   async getProfile() {
     const response = await fetch(this.getSessionUrl(`${BASE_URL}/api/profile`), {
       method: 'GET',
@@ -429,17 +440,23 @@ const API = {
     return await response.json();
   },
 
-  async updateProfile(name, email, phone) {
+  async updateProfile(name, email, phone, address, profilePhoto) {
+    const payload = {
+      full_name: name,
+      email: email,
+      phone_number: phone,
+      address: address
+    };
+    if (profilePhoto) {
+      payload.profile_photo = profilePhoto;
+    }
+    
     const response = await fetch(this.getSessionUrl(`${BASE_URL}/api/profile`), {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        full_name: name,
-        email: email,
-        phone_number: phone
-      }),
+      body: JSON.stringify(payload),
       credentials: 'include'
     });
     if (!response.ok) {
