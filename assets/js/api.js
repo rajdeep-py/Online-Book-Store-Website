@@ -276,18 +276,16 @@ const BASE_URL = 'http://localhost:8080/book_store_backend';
 function mapBackendBook(book) {
   if (book.title) return book; // Already in frontend format
 
-  let imagePath = 'assets/images/books/default-book.jpg';
+  let imagePath = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80';
   if (book.book_photo) {
     if (book.book_photo.startsWith('http')) {
       imagePath = book.book_photo;
     } else {
-      const cleanPhoto = book.book_photo.startsWith('/') ? book.book_photo.substring(1) : book.book_photo;
-      imagePath = `${BASE_URL}/${cleanPhoto}`;
+      imagePath = API.getImageUrl(book.book_photo);
     }
   } else if (book.book_name) {
     // Attempt fallback based on book name
-    const slug = book.book_name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    imagePath = `assets/images/books/${slug}.jpg`;
+    imagePath = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80';
   }
 
   return {
@@ -422,8 +420,12 @@ const API = {
     if (!path) return null;
     if (path.startsWith('http') || path.startsWith('data:image')) return path;
     try {
-      const urlObj = new URL(BASE_URL);
-      return urlObj.origin + (path.startsWith('/') ? path : '/' + path);
+      if (path.startsWith('/book_store_backend')) {
+        const urlObj = new URL(BASE_URL);
+        return urlObj.origin + path + '?t=' + new Date().getTime();
+      }
+      const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+      return `${BASE_URL}/${cleanPath}?t=` + new Date().getTime();
     } catch(e) {
       return path;
     }
@@ -462,6 +464,70 @@ const API = {
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || 'Failed to update profile');
+    }
+    return await response.json();
+  },
+
+  async syncCart(cartItems) {
+    if (!Storage.get('bookheaven_session_id')) return; // Only sync if logged in
+    try {
+      await fetch(this.getSessionUrl(`${BASE_URL}/api/cart`), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ items: cartItems }),
+        credentials: 'include'
+      });
+    } catch (e) {
+      console.warn("Failed to sync cart to backend", e);
+    }
+  },
+
+  async getCart() {
+    if (!Storage.get('bookheaven_session_id')) return null;
+    try {
+      const response = await fetch(this.getSessionUrl(`${BASE_URL}/api/cart`), {
+        method: 'GET',
+        credentials: 'include'
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const items = data.items || [];
+        return items.map(item => ({
+          ...item,
+          id: item.id || item.book_id
+        }));
+      }
+    } catch (e) {
+      console.warn("Failed to fetch cart from backend", e);
+    }
+    return null;
+  },
+
+  async createOrder(cartItems) {
+    const response = await fetch(this.getSessionUrl(`${BASE_URL}/api/orders`), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ items: cartItems }),
+      credentials: 'include'
+    });
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || 'Order placement failed');
+    }
+    return await response.json();
+  },
+
+  async getOrders() {
+    const response = await fetch(this.getSessionUrl(`${BASE_URL}/api/orders`), {
+      method: 'GET',
+      credentials: 'include'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to retrieve orders');
     }
     return await response.json();
   }

@@ -342,6 +342,8 @@ function updateUserHeaderStatus() {
         document.getElementById('logout-btn').addEventListener('click', () => {
           Storage.remove('bookheaven_logged_in_user');
           Storage.remove('bookheaven_session_id');
+          Storage.remove('bookheaven_cart');
+          Storage.remove('bookheaven_wishlist');
           Toast.success('Successfully logged out!');
           setTimeout(() => {
             window.location.reload();
@@ -363,6 +365,8 @@ function updateUserHeaderStatus() {
         document.getElementById('mob-logout-btn').addEventListener('click', () => {
           Storage.remove('bookheaven_logged_in_user');
           Storage.remove('bookheaven_session_id');
+          Storage.remove('bookheaven_cart');
+          Storage.remove('bookheaven_wishlist');
           Toast.success('Successfully logged out!');
           setTimeout(() => {
             window.location.reload();
@@ -416,6 +420,7 @@ function updateUserHeaderStatus() {
       // and we are NOT running on file:// mock mode, we clean up the storage to match backend
       Storage.remove('bookheaven_logged_in_user');
       Storage.remove('bookheaven_session_id');
+      Storage.remove('bookheaven_cart');
       renderStatus(null);
       
       // If we are on profile.html or orders.html or checkout.html, redirect them to login page because their session has expired!

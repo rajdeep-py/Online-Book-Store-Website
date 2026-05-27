@@ -48,6 +48,7 @@ const Cart = {
       }
 
       Storage.set('bookheaven_cart', cart);
+      API.syncCart(cart);
       Toast.success(`"${book.title}" added to your cart!`);
       
       // Update global count badges
@@ -69,6 +70,7 @@ const Cart = {
     
     cart = cart.filter(item => item.id !== bookId);
     Storage.set('bookheaven_cart', cart);
+    API.syncCart(cart);
     
     if (item) {
       Toast.success(`"${item.title}" removed from cart.`);
@@ -105,6 +107,7 @@ const Cart = {
 
       item.quantity = newQty;
       Storage.set('bookheaven_cart', cart);
+      API.syncCart(cart);
       
       if (window.updateCartAndWishlistBadges) {
         window.updateCartAndWishlistBadges();
@@ -155,7 +158,7 @@ const Cart = {
     // Render items list
     cartItemsContainer.innerHTML = cart.map(item => `
       <div class="cart-item-card fade-in">
-        <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+        <img src="${item.image}" alt="${item.title}" class="cart-item-image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80';">
         <div class="cart-item-details">
           <span class="cart-item-category">${item.category}</span>
           <h4 class="cart-item-title"><a href="book-details.html?id=${item.id}">${item.title}</a></h4>

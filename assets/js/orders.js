@@ -16,10 +16,10 @@ const Orders = {
 
     Loader.show();
     try {
-      const usersDB = await API.getUsers();
-      const currentUserData = usersDB.find(u => u.email.toLowerCase() === user.email.toLowerCase());
+      const response = await API.getOrders();
+      const ordersList = response.items || [];
 
-      if (!currentUserData || !currentUserData.orders || currentUserData.orders.length === 0) {
+      if (ordersList.length === 0) {
         listContainer.innerHTML = `
           <div class="empty-state" style="max-width: 100%;">
             <div class="empty-state-icon"><i class="ri-survey-line"></i></div>
@@ -32,11 +32,16 @@ const Orders = {
       }
 
       // Populate orders list
-      listContainer.innerHTML = currentUserData.orders.map(order => {
+      listContainer.innerHTML = ordersList.map(order => {
         let badgeClass = 'badge-info';
-        if (order.status === 'Delivered') badgeClass = 'badge-success';
-        if (order.status === 'Shipped') badgeClass = 'badge-warning';
-        if (order.status === 'Cancelled') badgeClass = 'badge-danger';
+        const status = order.order_status || 'Processing';
+        if (status === 'Delivered') badgeClass = 'badge-success';
+        if (status === 'Shipped') badgeClass = 'badge-warning';
+        if (status === 'Cancelled') badgeClass = 'badge-danger';
+
+        const orderDate = order.created_at ? order.created_at.split(' ')[0] : 'N/A';
+        const total = order.total_bill_amount || 0;
+        const items = order.items_ordered || [];
 
         return `
           <div class="order-history-card fade-in">
@@ -44,29 +49,29 @@ const Orders = {
               <div class="order-meta-info">
                 <div class="order-meta-item">
                   <span>ORDER PLACED</span>
-                  <span>${order.date}</span>
+                  <span>${orderDate}</span>
                 </div>
                 <div class="order-meta-item">
                   <span>TOTAL AMOUNT</span>
-                  <span>₹${order.total}</span>
+                  <span>₹${total}</span>
                 </div>
                 <div class="order-meta-item">
                   <span>ORDER NUMBER</span>
-                  <span>${order.orderId}</span>
+                  <span>ORD-${order.order_id}</span>
                 </div>
               </div>
-              <span class="badge ${badgeClass}">${order.status}</span>
+              <span class="badge ${badgeClass}">${status}</span>
             </div>
             
             <div class="order-card-body">
               <div class="order-card-items-list">
-                ${order.items.map(item => `
+                ${items.map(item => `
                   <div class="order-card-item">
                     <div class="order-item-info">
-                      <span class="order-item-name">${item.title}</span>
+                      <span class="order-item-name">${item.book_name || item.title}</span>
                       <span class="order-item-qty">Quantity: ${item.quantity}</span>
                     </div>
-                    <span class="order-item-price">₹${item.price}</span>
+                    <span class="order-item-price">₹${item.final_price || item.price}</span>
                   </div>
                 `).join('')}
               </div>

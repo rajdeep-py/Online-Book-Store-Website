@@ -31,7 +31,7 @@ const Books = {
     return `
       <div class="book-card fade-in" data-id="${book.id}">
         <div class="book-card-image-box">
-          <img src="${book.image}" alt="${book.title}" loading="lazy">
+          <img src="${book.image}" alt="${book.title}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80';">
           <button class="wishlist-toggle-btn ${inWishlist ? 'active' : ''}" data-id="${book.id}" title="Toggle Wishlist">
             <i class="ri-heart-${inWishlist ? 'fill' : 'line'}"></i>
           </button>

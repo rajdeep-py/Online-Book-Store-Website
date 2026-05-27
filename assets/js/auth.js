@@ -54,6 +54,23 @@ const Auth = {
       Storage.set('bookheaven_logged_in_user', sessionUser);
       Toast.success(`Welcome back, ${sessionUser.name}!`);
 
+      // Sync Cart upon login
+      try {
+        const backendCart = await API.getCart();
+        if (backendCart && backendCart.length > 0) {
+          // Overwrite local cart with saved backend cart
+          Storage.set('bookheaven_cart', backendCart);
+        } else {
+          // If backend is empty but user shopped as guest, push to backend
+          const localCart = Storage.get('bookheaven_cart', []);
+          if (localCart.length > 0) {
+            API.syncCart(localCart);
+          }
+        }
+      } catch (e) {
+        console.warn("Cart sync on login failed", e);
+      }
+
       // Handle redirect URL
       setTimeout(() => {
         const params = new URLSearchParams(window.location.search);

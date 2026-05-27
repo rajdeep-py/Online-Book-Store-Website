@@ -26,7 +26,7 @@ const Checkout = {
     // Populate item list
     listContainer.innerHTML = cart.map(item => `
       <div class="review-item">
-        <img src="${item.image}" alt="${item.title}" class="review-item-img">
+        <img src="${item.image}" alt="${item.title}" class="review-item-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80';">
         <div class="review-item-info">
           <h5 class="review-item-title">${item.title}</h5>
           <span class="review-item-qty-price">${item.quantity} x ₹${item.price}</span>
@@ -74,7 +74,6 @@ const Checkout = {
     try {
       const user = Storage.get('bookheaven_logged_in_user');
       const cart = Storage.get('bookheaven_cart', []);
-      const usersDB = await API.getUsers();
 
       if (!user) {
         Toast.error('Please log in to place orders.');
@@ -86,34 +85,19 @@ const Checkout = {
       const shipping = subtotal > 1000 ? 0 : 60;
       const grandTotal = subtotal + shipping;
 
-      // Construct Mock Order
-      const newOrder = {
-        orderId: `ORD-2026-${Math.floor(10000 + Math.random() * 90000)}`,
-        date: new Date().toISOString().split('T')[0],
-        status: 'Processing',
-        total: grandTotal,
-        items: cart.map(item => ({
-          id: item.id,
-          title: item.title,
-          price: item.price,
-          quantity: item.quantity
-        })),
-        shippingAddress: formData,
-        paymentMethod: this.selectedPaymentMethod
-      };
+      const payloadCart = cart.map(item => ({
+        book_id: item.id,
+        title: item.title,
+        price: item.price,
+        quantity: item.quantity
+      }));
 
-      // Append order to local simulated user object
-      const dbUserIndex = usersDB.findIndex(u => u.email.toLowerCase() === user.email.toLowerCase());
-      if (dbUserIndex > -1) {
-        if (!usersDB[dbUserIndex].orders) {
-          usersDB[dbUserIndex].orders = [];
-        }
-        usersDB[dbUserIndex].orders.unshift(newOrder); // Add to top of orders list
-        Storage.set('bookheaven_users_db', usersDB);
-      }
+      // Call Backend API
+      await API.createOrder(payloadCart);
 
       // Empty shopping cart
       Storage.set('bookheaven_cart', []);
+      API.syncCart([]);
       if (window.updateCartAndWishlistBadges) {
         window.updateCartAndWishlistBadges();
       }
