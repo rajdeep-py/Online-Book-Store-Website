@@ -313,6 +313,7 @@ function highlightActiveLinks() {
 }
 
 // Fetch session and adjust drop-down listings
+// Fetch session and adjust drop-down listings
 function updateUserHeaderStatus() {
   const currentUser = Storage.get('bookheaven_logged_in_user');
   const dropdownName = document.getElementById('dropdown-user-name');
@@ -320,71 +321,112 @@ function updateUserHeaderStatus() {
   const dropdownAuthBox = document.getElementById('dropdown-auth-actions');
   const mobileAuthSection = document.getElementById('mobile-auth-section');
 
-  if (currentUser) {
-    // Logged In Status
-    if (dropdownName) dropdownName.textContent = currentUser.name;
-    if (dropdownEmail) dropdownEmail.textContent = currentUser.email;
+  function renderStatus(user) {
+    if (user) {
+      // Logged In Status
+      if (dropdownName) dropdownName.textContent = user.name;
+      if (dropdownEmail) dropdownEmail.textContent = user.email;
 
-    const loggedInLinks = `
-      <a href="profile.html" class="user-dropdown-item"><i class="ri-user-settings-line"></i> My Profile</a>
-      <a href="orders.html" class="user-dropdown-item"><i class="ri-survey-line"></i> Order History</a>
-      <a href="wishlist.html" class="user-dropdown-item"><i class="ri-heart-line"></i> My Wishlist</a>
-      <button class="user-dropdown-item logout" id="logout-btn" style="border: none; background: none; width: 100%; text-align: left; cursor: pointer; font-family: inherit;">
-        <i class="ri-logout-box-line"></i> Logout
-      </button>
-    `;
+      const loggedInLinks = `
+        <a href="profile.html" class="user-dropdown-item"><i class="ri-user-settings-line"></i> My Profile</a>
+        <a href="orders.html" class="user-dropdown-item"><i class="ri-survey-line"></i> Order History</a>
+        <a href="wishlist.html" class="user-dropdown-item"><i class="ri-heart-line"></i> My Wishlist</a>
+        <button class="user-dropdown-item logout" id="logout-btn" style="border: none; background: none; width: 100%; text-align: left; cursor: pointer; font-family: inherit;">
+          <i class="ri-logout-box-line"></i> Logout
+        </button>
+      `;
 
-    if (dropdownAuthBox) {
-      dropdownAuthBox.innerHTML = loggedInLinks;
-      // Add Logout trigger
-      document.getElementById('logout-btn').addEventListener('click', () => {
-        Storage.remove('bookheaven_logged_in_user');
-        Toast.success('Successfully logged out!');
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      });
-    }
+      if (dropdownAuthBox) {
+        dropdownAuthBox.innerHTML = loggedInLinks;
+        // Add Logout trigger
+        document.getElementById('logout-btn').addEventListener('click', () => {
+          Storage.remove('bookheaven_logged_in_user');
+          Storage.remove('bookheaven_session_id');
+          Toast.success('Successfully logged out!');
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        });
+      }
 
-    if (mobileAuthSection) {
-      mobileAuthSection.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
-          <i class="ri-user-line" style="font-size: 1.5rem; color: var(--primary-color);"></i>
-          <div>
-            <h5 style="margin: 0; font-size: 0.95rem;">${currentUser.name}</h5>
-            <p style="margin: 0; font-size: 0.75rem; color: var(--text-muted);">${currentUser.email}</p>
+      if (mobileAuthSection) {
+        mobileAuthSection.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+            <i class="ri-user-line" style="font-size: 1.5rem; color: var(--primary-color);"></i>
+            <div>
+              <h5 style="margin: 0; font-size: 0.95rem;">${user.name}</h5>
+              <p style="margin: 0; font-size: 0.75rem; color: var(--text-muted);">${user.email}</p>
+            </div>
           </div>
-        </div>
-        <button class="btn btn-secondary" id="mob-logout-btn" style="width: 100%;">Logout</button>
+          <button class="btn btn-secondary" id="mob-logout-btn" style="width: 100%;">Logout</button>
+        `;
+        document.getElementById('mob-logout-btn').addEventListener('click', () => {
+          Storage.remove('bookheaven_logged_in_user');
+          Storage.remove('bookheaven_session_id');
+          Toast.success('Successfully logged out!');
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        });
+      }
+    } else {
+      // Guest Status
+      if (dropdownName) dropdownName.textContent = 'Guest User';
+      if (dropdownEmail) dropdownEmail.textContent = 'Sign in to place orders';
+
+      const guestLinks = `
+        <a href="login.html" class="user-dropdown-item"><i class="ri-login-box-line"></i> Sign In</a>
+        <a href="register.html" class="user-dropdown-item"><i class="ri-user-add-line"></i> Create Account</a>
       `;
-      document.getElementById('mob-logout-btn').addEventListener('click', () => {
-        Storage.remove('bookheaven_logged_in_user');
-        Toast.success('Successfully logged out!');
+
+      if (dropdownAuthBox) dropdownAuthBox.innerHTML = guestLinks;
+
+      if (mobileAuthSection) {
+        mobileAuthSection.innerHTML = `
+          <div style="display: flex; gap: 1rem;">
+            <a href="login.html" class="btn btn-secondary" style="flex: 1; padding: 0.6rem;">Sign In</a>
+            <a href="register.html" class="btn btn-primary" style="flex: 1; padding: 0.6rem;">Register</a>
+          </div>
+        `;
+      }
+    }
+  }
+
+  // Render initial status from local storage
+  renderStatus(currentUser);
+
+  // Sync asynchronously with backend session if not local protocol
+  if (currentUser && !API.isLocalProtocol()) {
+    API.getProfile().then(backendProfile => {
+      const updatedUser = {
+        id: backendProfile.customer_id,
+        name: backendProfile.full_name,
+        email: backendProfile.email,
+        phone: backendProfile.phone_number || '',
+        avatar: backendProfile.profile_photo || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150'
+      };
+      Storage.set('bookheaven_logged_in_user', updatedUser);
+      // Re-render if it changed
+      if (updatedUser.name !== currentUser.name || updatedUser.email !== currentUser.email) {
+        renderStatus(updatedUser);
+      }
+    }).catch(err => {
+      console.warn("Backend session validation failed or session expired. Logging out.", err);
+      // If we got an error while local storage thought we were logged in,
+      // and we are NOT running on file:// mock mode, we clean up the storage to match backend
+      Storage.remove('bookheaven_logged_in_user');
+      Storage.remove('bookheaven_session_id');
+      renderStatus(null);
+      
+      // If we are on profile.html or orders.html or checkout.html, redirect them to login page because their session has expired!
+      const currentPath = window.location.pathname;
+      if (currentPath.includes('profile.html') || currentPath.includes('orders.html') || currentPath.includes('checkout.html')) {
+        Toast.error("Session expired! Please login again.");
         setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      });
-    }
-  } else {
-    // Guest Status
-    if (dropdownName) dropdownName.textContent = 'Guest User';
-    if (dropdownEmail) dropdownEmail.textContent = 'Sign in to place orders';
-
-    const guestLinks = `
-      <a href="login.html" class="user-dropdown-item"><i class="ri-login-box-line"></i> Sign In</a>
-      <a href="register.html" class="user-dropdown-item"><i class="ri-user-add-line"></i> Create Account</a>
-    `;
-
-    if (dropdownAuthBox) dropdownAuthBox.innerHTML = guestLinks;
-
-    if (mobileAuthSection) {
-      mobileAuthSection.innerHTML = `
-        <div style="display: flex; gap: 1rem;">
-          <a href="login.html" class="btn btn-secondary" style="flex: 1; padding: 0.6rem;">Sign In</a>
-          <a href="register.html" class="btn btn-primary" style="flex: 1; padding: 0.6rem;">Register</a>
-        </div>
-      `;
-    }
+          window.location.href = `login.html?redirect=${encodeURIComponent(currentPath.split('/').pop())}`;
+        }, 1500);
+      }
+    });
   }
 }
 

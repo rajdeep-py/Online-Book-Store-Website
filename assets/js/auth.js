@@ -12,32 +12,47 @@ const Auth = {
   async login(email, password) {
     Loader.show();
     try {
-      const users = await this.getUsersDB();
-      const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+      let sessionUser;
+      try {
+        const backendUser = await API.login(email, password);
+        sessionUser = {
+          id: backendUser.customer_id,
+          name: backendUser.full_name,
+          email: backendUser.email,
+          phone: backendUser.phone_number || '',
+          avatar: backendUser.profile_photo || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150'
+        };
+        if (backendUser.session_id) {
+          Storage.set('bookheaven_session_id', backendUser.session_id);
+        }
+      } catch (err) {
+        console.warn("Backend login failed, falling back to mock authentication.", err);
+        const users = await this.getUsersDB();
+        const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
 
-      if (!user) {
-        Toast.error('No account registered with this email address!');
-        Loader.hide();
-        return false;
+        if (!user) {
+          Toast.error('No account registered with this email address!');
+          Loader.hide();
+          return false;
+        }
+
+        if (user.password !== password) {
+          Toast.error('Incorrect password! Please try again.');
+          Loader.hide();
+          return false;
+        }
+
+        sessionUser = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone || '',
+          avatar: user.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150'
+        };
       }
-
-      if (user.password !== password) {
-        Toast.error('Incorrect password! Please try again.');
-        Loader.hide();
-        return false;
-      }
-
-      // Establish session
-      const sessionUser = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        phone: user.phone || '',
-        avatar: user.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150'
-      };
       
       Storage.set('bookheaven_logged_in_user', sessionUser);
-      Toast.success(`Welcome back, ${user.name}!`);
+      Toast.success(`Welcome back, ${sessionUser.name}!`);
 
       // Handle redirect URL
       setTimeout(() => {
@@ -49,38 +64,43 @@ const Auth = {
       return true;
     } catch (e) {
       console.error(e);
-      Toast.error('Simulated authentication failed.');
+      Toast.error('Authentication failed.');
       Loader.hide();
       return false;
     }
   },
 
-  // Register a new mock user account
+  // Register a new user account
   async register(name, email, password) {
     Loader.show();
     try {
-      const users = await this.getUsersDB();
-      const emailExists = users.some(u => u.email.toLowerCase() === email.toLowerCase());
+      try {
+        await API.register(name, email, password);
+      } catch (err) {
+        console.warn("Backend registration failed, falling back to mock registration.", err);
+        const users = await this.getUsersDB();
+        const emailExists = users.some(u => u.email.toLowerCase() === email.toLowerCase());
 
-      if (emailExists) {
-        Toast.error('An account already exists with this email address!');
-        Loader.hide();
-        return false;
+        if (emailExists) {
+          Toast.error('An account already exists with this email address!');
+          Loader.hide();
+          return false;
+        }
+
+        const newUser = {
+          id: users.length + 1,
+          name: name,
+          email: email,
+          password: password,
+          phone: '',
+          avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150',
+          addresses: [],
+          orders: []
+        };
+
+        users.push(newUser);
+        Storage.set('bookheaven_users_db', users);
       }
-
-      const newUser = {
-        id: users.length + 1,
-        name: name,
-        email: email,
-        password: password,
-        phone: '',
-        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150',
-        addresses: [],
-        orders: []
-      };
-
-      users.push(newUser);
-      Storage.set('bookheaven_users_db', users);
       
       Toast.success('Account created successfully! Redirecting to Login...');
       

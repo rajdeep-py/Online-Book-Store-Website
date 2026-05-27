@@ -281,7 +281,8 @@ function mapBackendBook(book) {
     if (book.book_photo.startsWith('http')) {
       imagePath = book.book_photo;
     } else {
-      imagePath = `${BASE_URL}/${book.book_photo}`;
+      const cleanPhoto = book.book_photo.startsWith('/') ? book.book_photo.substring(1) : book.book_photo;
+      imagePath = `${BASE_URL}/${cleanPhoto}`;
     }
   } else if (book.book_name) {
     // Attempt fallback based on book name
@@ -375,6 +376,77 @@ const API = {
   async getBookById(id) {
     const books = await this.getBooks();
     return books.find(book => book.id === parseInt(id));
+  },
+
+  async login(email, password) {
+    const response = await fetch(`${BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password }),
+      credentials: 'include'
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Authentication failed');
+    }
+    return await response.json();
+  },
+
+  async register(name, email, password) {
+    const response = await fetch(`${BASE_URL}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        full_name: name,
+        email: email,
+        password: password
+      }),
+      credentials: 'include'
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Registration failed');
+    }
+    return await response.json();
+  },
+  getSessionUrl(url) {
+    const sessionId = Storage.get('bookheaven_session_id');
+    return sessionId ? `${url};jsessionid=${sessionId}` : url;
+  },
+
+  async getProfile() {
+    const response = await fetch(this.getSessionUrl(`${BASE_URL}/api/profile`), {
+      method: 'GET',
+      credentials: 'include'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to retrieve profile');
+    }
+    return await response.json();
+  },
+
+  async updateProfile(name, email, phone) {
+    const response = await fetch(this.getSessionUrl(`${BASE_URL}/api/profile`), {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        full_name: name,
+        email: email,
+        phone_number: phone
+      }),
+      credentials: 'include'
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to update profile');
+    }
+    return await response.json();
   }
 };
 

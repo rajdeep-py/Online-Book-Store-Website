@@ -20,8 +20,26 @@ const Profile = {
 
     Loader.show();
     try {
-      const usersDB = await API.getUsers();
-      const currentUser = usersDB.find(u => u.email.toLowerCase() === user.email.toLowerCase());
+      let currentUser;
+      try {
+        const backendProfile = await API.getProfile();
+        currentUser = {
+          name: backendProfile.full_name,
+          email: backendProfile.email,
+          phone: backendProfile.phone_number
+        };
+      } catch (err) {
+        console.warn("Backend load profile failed, falling back to mock data.", err);
+        const usersDB = await API.getUsers();
+        const fallbackUser = usersDB.find(u => u.email.toLowerCase() === user.email.toLowerCase());
+        if (fallbackUser) {
+          currentUser = {
+            name: fallbackUser.name,
+            email: fallbackUser.email,
+            phone: fallbackUser.phone
+          };
+        }
+      }
 
       if (currentUser) {
         if (nameInput) nameInput.value = currentUser.name;
@@ -44,39 +62,40 @@ const Profile = {
     Loader.show();
     try {
       const user = Storage.get('bookheaven_logged_in_user');
-      const usersDB = await API.getUsers();
 
-      const userIndex = usersDB.findIndex(u => u.email.toLowerCase() === user.email.toLowerCase());
-      if (userIndex > -1) {
-        // Prevent duplicate emails if email was changed
-        if (email.toLowerCase() !== user.email.toLowerCase()) {
-          const emailExists = usersDB.some(u => u.email.toLowerCase() === email.toLowerCase());
-          if (emailExists) {
-            Toast.error('An account already exists with this new email!');
-            Loader.hide();
-            return false;
+      try {
+        await API.updateProfile(name, email, phone);
+      } catch (err) {
+        console.warn("Backend update profile failed, falling back to mock data.", err);
+        const usersDB = await API.getUsers();
+        const userIndex = usersDB.findIndex(u => u.email.toLowerCase() === user.email.toLowerCase());
+        if (userIndex > -1) {
+          if (email.toLowerCase() !== user.email.toLowerCase()) {
+            const emailExists = usersDB.some(u => u.email.toLowerCase() === email.toLowerCase());
+            if (emailExists) {
+              Toast.error('An account already exists with this new email!');
+              Loader.hide();
+              return false;
+            }
           }
+          usersDB[userIndex].name = name;
+          usersDB[userIndex].email = email;
+          usersDB[userIndex].phone = phone;
+          Storage.set('bookheaven_users_db', usersDB);
         }
+      }
 
-        // Update database records
-        usersDB[userIndex].name = name;
-        usersDB[userIndex].email = email;
-        usersDB[userIndex].phone = phone;
+      // Update session
+      user.name = name;
+      user.email = email;
+      user.phone = phone;
+      Storage.set('bookheaven_logged_in_user', user);
 
-        Storage.set('bookheaven_users_db', usersDB);
-
-        // Update session
-        user.name = name;
-        user.email = email;
-        user.phone = phone;
-        Storage.set('bookheaven_logged_in_user', user);
-
-        Toast.success('Profile updated successfully!');
-        this.loadAccountDetails();
-        
-        if (window.updateUserHeaderStatus) {
-          window.updateUserHeaderStatus();
-        }
+      Toast.success('Profile updated successfully!');
+      this.loadAccountDetails();
+      
+      if (window.updateUserHeaderStatus) {
+        window.updateUserHeaderStatus();
       }
     } catch (e) {
       console.error(e);
