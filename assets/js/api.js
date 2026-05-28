@@ -469,14 +469,19 @@ const API = {
   },
 
   async syncCart(cartItems) {
-    if (!Storage.get('bookheaven_session_id')) return; // Only sync if logged in
+    const user = Storage.get('bookheaven_logged_in_user');
+    if (!Storage.get('bookheaven_session_id') || !user) return; // Only sync if logged in
     try {
-      await fetch(this.getSessionUrl(`${BASE_URL}/api/cart`), {
+      const backendItems = cartItems.map(i => ({ ...i, book_id: i.id }));
+      await fetch(this.getSessionUrl(`${BASE_URL}/api/carts`), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ items: cartItems }),
+        body: JSON.stringify({ 
+          customer_id: user.id,
+          items: backendItems 
+        }),
         credentials: 'include'
       });
     } catch (e) {
@@ -487,7 +492,7 @@ const API = {
   async getCart() {
     if (!Storage.get('bookheaven_session_id')) return null;
     try {
-      const response = await fetch(this.getSessionUrl(`${BASE_URL}/api/cart`), {
+      const response = await fetch(this.getSessionUrl(`${BASE_URL}/api/carts`), {
         method: 'GET',
         credentials: 'include'
       });
