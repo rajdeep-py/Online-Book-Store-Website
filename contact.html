@@ -54,7 +54,7 @@
             <div class="contact-card-icon"><i class="ri-map-pin-2-line"></i></div>
             <div class="contact-card-content">
               <h4>Physical Headquarters</h4>
-              <p>123 Library Lane, Booktown, New York, NY 10001, USA</p>
+              <p id="dyn-address">123 Library Lane, Booktown, New York, NY 10001, USA</p>
             </div>
           </div>
 
@@ -62,7 +62,7 @@
             <div class="contact-card-icon"><i class="ri-mail-send-line"></i></div>
             <div class="contact-card-content">
               <h4>Email Communication</h4>
-              <p><a href="mailto:support@bookheaven.com">support@bookheaven.com</a></p>
+              <p><a href="mailto:support@bookheaven.com" id="dyn-email">support@bookheaven.com</a></p>
             </div>
           </div>
 
@@ -70,7 +70,7 @@
             <div class="contact-card-icon"><i class="ri-phone-line"></i></div>
             <div class="contact-card-content">
               <h4>24/7 Phone Hotline</h4>
-              <p><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+              <p><a href="tel:+1234567890" id="dyn-phone">+1 (234) 567-890</a></p>
             </div>
           </div>
 
@@ -99,6 +99,11 @@
             <div class="form-group">
               <label for="c-email">Email Address</label>
               <input type="email" id="c-email" class="form-control" placeholder="john@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="c-phone">Phone Number</label>
+              <input type="tel" id="c-phone" class="form-control" placeholder="+1 234 567 8900" required>
             </div>
 
             <div class="form-group">
@@ -137,14 +142,35 @@
 
   <!-- Form Bindings -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Fetch dynamic contact info
+      try {
+        const aboutData = await window.API.getAboutUs();
+        if (aboutData) {
+          if (aboutData.address) document.getElementById('dyn-address').textContent = aboutData.address;
+          if (aboutData.email_id) {
+            const emailEl = document.getElementById('dyn-email');
+            emailEl.textContent = aboutData.email_id;
+            emailEl.href = 'mailto:' + aboutData.email_id;
+          }
+          if (aboutData.phone_no) {
+            const phoneEl = document.getElementById('dyn-phone');
+            phoneEl.textContent = aboutData.phone_no;
+            phoneEl.href = 'tel:' + aboutData.phone_no;
+          }
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic contact info', err);
+      }
+
       const form = document.getElementById('contact-inquiry-form');
       if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
           e.preventDefault();
 
           const name = document.getElementById('c-name');
           const email = document.getElementById('c-email');
+          const phone = document.getElementById('c-phone');
           const subject = document.getElementById('c-subject');
           const message = document.getElementById('c-message');
 
@@ -164,6 +190,13 @@
             Validation.setSuccess(email);
           }
 
+          if (!phone.value.trim() || phone.value.trim().length < 8) {
+            Validation.setError(phone, 'Enter a valid phone number.');
+            isValid = false;
+          } else {
+            Validation.setSuccess(phone);
+          }
+
           if (!subject.value.trim()) {
             Validation.setError(subject, 'Subject is required.');
             isValid = false;
@@ -180,17 +213,29 @@
 
           if (isValid) {
             Loader.show();
-            setTimeout(() => {
-              Loader.hide();
+            try {
+              await window.API.postEnquiry({
+                name: name.value.trim(),
+                email: email.value.trim(),
+                phone_no: phone.value.trim(),
+                subject: subject.value.trim(),
+                message: message.value.trim()
+              });
+              
               Toast.success('Your message was successfully sent! We will contact you soon.');
               form.reset();
               
               // Clear statuses
               Validation.clearStatus(name);
               Validation.clearStatus(email);
+              Validation.clearStatus(phone);
               Validation.clearStatus(subject);
               Validation.clearStatus(message);
-            }, 1000);
+            } catch (error) {
+              Toast.error(error.message || 'Failed to send inquiry. Please try again later.');
+            } finally {
+              Loader.hide();
+            }
           }
         });
       }

@@ -526,6 +526,32 @@ const API = {
     return await response.json();
   },
 
+  async getAboutUs() {
+    const response = await fetch(`${BASE_URL}/api/about`, {
+      method: 'GET'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to retrieve portfolio data');
+    }
+    const data = await response.json();
+    return data.items && data.items.length > 0 ? data.items[0] : null;
+  },
+
+  async postEnquiry(payload) {
+    const response = await fetch(`${BASE_URL}/api/contacts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || 'Failed to submit enquiry');
+    }
+    return await response.json();
+  },
+
   async getOrders() {
     const response = await fetch(this.getSessionUrl(`${BASE_URL}/api/orders`), {
       method: 'GET',

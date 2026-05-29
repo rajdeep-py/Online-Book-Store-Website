@@ -8,8 +8,8 @@ function getNavbarHTML() {
     <header class="header" id="global-header">
       <div class="container nav-container">
         <!-- Brand Logo -->
-        <a href="index.html" class="logo">
-          <i class="ri-book-open-fill logo-icon"></i>
+        <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 8px;">
+          <img src="assets/images/logos/logo.png" alt="Logo" class="logo-icon" style="height: 32px; width: auto; vertical-align: middle;">
           Book<span>Heaven</span>
         </a>
 
@@ -71,8 +71,8 @@ function getNavbarHTML() {
     <div class="overlay" id="mobile-nav-overlay"></div>
     <div class="mobile-nav-panel" id="mobile-nav-panel">
       <div class="mobile-nav-header">
-        <a href="index.html" class="logo">
-          <i class="ri-book-open-fill logo-icon"></i>
+        <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 8px;">
+          <img src="assets/images/logos/logo.png" alt="Logo" class="logo-icon" style="height: 32px; width: auto; vertical-align: middle;">
           Book<span>Heaven</span>
         </a>
         <button class="action-btn" id="mobile-menu-close">
@@ -101,8 +101,8 @@ function getFooterHTML() {
         <div class="footer-top">
           <!-- Brand Details Column -->
           <div class="footer-brand">
-            <a href="index.html" class="logo">
-              <i class="ri-book-open-fill logo-icon"></i>
+            <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 8px;">
+              <img src="assets/images/logos/logo.png" alt="Logo" class="logo-icon" style="height: 32px; width: auto; vertical-align: middle;">
               Book<span>Heaven</span>
             </a>
             <p>Your ultimate destination for discovering great authors, inspiring stories, and life-changing academic knowledge. Find your next favorite read today.</p>

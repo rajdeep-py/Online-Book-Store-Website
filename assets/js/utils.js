@@ -139,3 +139,18 @@ window.Storage = Storage;
 window.Currency = Currency;
 window.Loader = Loader;
 window.Toast = Toast;
+
+// Global Image Error Fallback Handler
+window.addEventListener('error', function (e) {
+  if (e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
+    const isUser = e.target.classList.contains('profile-avatar') || e.target.id.includes('user') || e.target.id.includes('avatar');
+    const fallbackPath = isUser ? 'assets/images/icons/user.png' : 'assets/images/icons/book.png';
+    
+    // Only set if not already the fallback to prevent infinite loop
+    if (!e.target.src.includes(fallbackPath)) {
+      e.target.src = fallbackPath;
+      // Also ensure background doesn't stay transparent if it was broken
+      e.target.style.backgroundColor = '#f1f1f5';
+    }
+  }
+}, true);
