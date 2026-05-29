@@ -3,7 +3,7 @@
  */
 
 const Checkout = {
-  selectedPaymentMethod: 'credit-card',
+  selectedPaymentMethod: 'cod',
 
   // Populate purchase summary on page load
   renderSummary() {
@@ -47,24 +47,10 @@ const Checkout = {
 
   // Initialize Payment Method card clicks
   initPaymentSelectors() {
-    const ccCard = document.getElementById('pm-cc');
     const codCard = document.getElementById('pm-cod');
-    const ccDetailsBox = document.getElementById('cc-details-box');
-
-    if (ccCard && codCard) {
-      ccCard.addEventListener('click', () => {
-        ccCard.classList.add('active');
-        codCard.classList.remove('active');
-        this.selectedPaymentMethod = 'credit-card';
-        if (ccDetailsBox) ccDetailsBox.style.display = 'flex';
-      });
-
-      codCard.addEventListener('click', () => {
-        codCard.classList.add('active');
-        ccCard.classList.remove('active');
-        this.selectedPaymentMethod = 'cod';
-        if (ccDetailsBox) ccDetailsBox.style.display = 'none';
-      });
+    if (codCard) {
+      codCard.classList.add('active');
+      this.selectedPaymentMethod = 'cod';
     }
   },
 
@@ -183,33 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
           Validation.setSuccess(phone);
         }
 
-        // Validate credit card details if selected
-        if (Checkout.selectedPaymentMethod === 'credit-card') {
-          const cardNum = document.getElementById('card-number');
-          const expiry = document.getElementById('expiry');
-          const cvv = document.getElementById('cvv');
-
-          if (!cardNum.value.trim() || cardNum.value.trim().replace(/\s/g, '').length !== 16) {
-            Validation.setError(cardNum, 'Enter a valid 16-digit Card Number.');
-            isValid = false;
-          } else {
-            Validation.setSuccess(cardNum);
-          }
-
-          if (!expiry.value.trim()) {
-            Validation.setError(expiry, 'Expiry Date required (MM/YY).');
-            isValid = false;
-          } else {
-            Validation.setSuccess(expiry);
-          }
-
-          if (!cvv.value.trim() || cvv.value.trim().length !== 3) {
-            Validation.setError(cvv, 'Enter 3-digit CVV.');
-            isValid = false;
-          } else {
-            Validation.setSuccess(cvv);
-          }
-        }
 
         if (isValid) {
           const formData = {

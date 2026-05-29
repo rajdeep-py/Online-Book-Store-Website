@@ -8,6 +8,20 @@ const Cart = {
     return Storage.get('bookheaven_cart', []);
   },
 
+  // Initialize cart from backend if logged in
+  async initCart() {
+    const backendCart = await API.getCart();
+    if (backendCart) {
+      Storage.set('bookheaven_cart', backendCart);
+      if (window.updateCartAndWishlistBadges) {
+        window.updateCartAndWishlistBadges();
+      }
+      if (window.location.pathname.includes('cart.html')) {
+        this.renderCartPage();
+      }
+    }
+  },
+
   // Add a book to cart
   async add(bookId, quantity = 1) {
     Loader.show();
@@ -244,7 +258,9 @@ window.Cart = Cart;
 
 // Render page automatically when loaded
 document.addEventListener('DOMContentLoaded', () => {
-  if (window.location.pathname.includes('cart.html')) {
-    Cart.renderCartPage();
-  }
+  Cart.initCart().then(() => {
+    if (window.location.pathname.includes('cart.html')) {
+      Cart.renderCartPage();
+    }
+  });
 });
