@@ -20,7 +20,7 @@ const Auth = {
           name: backendUser.full_name,
           email: backendUser.email,
           phone: backendUser.phone_number || '',
-          avatar: backendUser.profile_photo ? API.getImageUrl(backendUser.profile_photo) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150'
+          avatar: backendUser.profile_photo ? API.getImageUrl(backendUser.profile_photo) : 'assets/images/icons/user.png'
         };
         if (backendUser.session_id) {
           Storage.set('bookheaven_session_id', backendUser.session_id);
@@ -47,7 +47,7 @@ const Auth = {
           name: user.name,
           email: user.email,
           phone: user.phone || '',
-          avatar: user.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150'
+          avatar: user.avatar || 'assets/images/icons/user.png'
         };
       }
       
@@ -110,7 +110,7 @@ const Auth = {
           email: email,
           password: password,
           phone: '',
-          avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150',
+          avatar: 'assets/images/icons/user.png',
           addresses: [],
           orders: []
         };

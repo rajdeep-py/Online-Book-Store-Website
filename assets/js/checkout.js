@@ -26,7 +26,7 @@ const Checkout = {
     // Populate item list
     listContainer.innerHTML = cart.map(item => `
       <div class="review-item">
-        <img src="${item.image}" alt="${item.title}" class="review-item-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80';">
+        <img src="${item.image}" alt="${item.title}" class="review-item-img" onerror="this.onerror=null; this.src='assets/images/icons/book.png';">
         <div class="review-item-info">
           <h5 class="review-item-title">${item.title}</h5>
           <span class="review-item-qty-price">${item.quantity} x ₹${item.price}</span>

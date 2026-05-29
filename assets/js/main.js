@@ -458,7 +458,7 @@ function updateUserHeaderStatus() {
         name: backendProfile.full_name,
         email: backendProfile.email,
         phone: backendProfile.phone_number,
-        avatar: backendProfile.profile_photo ? API.getImageUrl(backendProfile.profile_photo) : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150'
+        avatar: backendProfile.profile_photo ? API.getImageUrl(backendProfile.profile_photo) : 'assets/images/icons/user.png'
       };
       Storage.set('bookheaven_logged_in_user', updatedUser);
       // Re-render if it changed

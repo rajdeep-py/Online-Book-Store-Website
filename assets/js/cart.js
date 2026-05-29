@@ -172,7 +172,7 @@ const Cart = {
     // Render items list
     cartItemsContainer.innerHTML = cart.map(item => `
       <div class="cart-item-card fade-in">
-        <img src="${item.image}" alt="${item.title}" class="cart-item-image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80';">
+        <img src="${item.image}" alt="${item.title}" class="cart-item-image" onerror="this.onerror=null; this.src='assets/images/icons/book.png';">
         <div class="cart-item-details">
           <span class="cart-item-category">${item.category}</span>
           <h4 class="cart-item-title"><a href="book-details.html?id=${item.id}">${item.title}</a></h4>

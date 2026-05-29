@@ -12,7 +12,7 @@ const MOCK_BOOKS = [
     "price": 499,
     "rating": 4.8,
     "stock": 20,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/51-nXsSRfZL._SX328_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "An easy and proven way to build good habits and break bad ones. Atomic Habits will reshape the way you think about progress and success, and give you the tools and strategies you need to transform your habits."
   },
   {
@@ -23,7 +23,7 @@ const MOCK_BOOKS = [
     "price": 399,
     "rating": 4.6,
     "stock": 15,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/4175fWWDooL._SX322_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "Rules for focused success in a distracted world. Deep Work is the ability to focus without distraction on a cognitively demanding task, allowing you to quickly master complicated information and produce better results."
   },
   {
@@ -34,7 +34,7 @@ const MOCK_BOOKS = [
     "price": 899,
     "rating": 4.9,
     "stock": 12,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/41xShCOK5mL._SX379_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "A handbook of agile software craftsmanship. Even bad code can function, but if code isn't clean, it can bring a development organization to its knees. This book is a must-read for any software engineer."
   },
   {
@@ -45,7 +45,7 @@ const MOCK_BOOKS = [
     "price": 999,
     "rating": 4.9,
     "stock": 8,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/41HFl4vN1jL._SX379_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "Your journey to mastery. One of the most significant books on software development, helping programmers create better software and rediscover the joy of coding."
   },
   {
@@ -56,7 +56,7 @@ const MOCK_BOOKS = [
     "price": 450,
     "rating": 4.5,
     "stock": 25,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/4137RDgdV6L._SX322_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "Notes on startups, or how to build the future. Peter Thiel shows how we can find singular ways to create those new things, moving from 0 to 1 rather than copying what already exists."
   },
   {
@@ -67,7 +67,7 @@ const MOCK_BOOKS = [
     "price": 649,
     "rating": 4.7,
     "stock": 18,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/51H7gD5S2BL._SX330_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "The definitive book on value investing. Benjamin Graham's classic bestseller has taught and inspired people worldwide, offering sound principles for financial success."
   },
   {
@@ -78,7 +78,7 @@ const MOCK_BOOKS = [
     "price": 599,
     "rating": 4.7,
     "stock": 30,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/41-PscQW-8L._SX316_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "The masterpiece of science fiction. Dune is a triumph of the imagination, set on the desert planet Arrakis, telling the story of the boy Paul Atreides, heir to a noble family tasked with ruling an inhospitable world."
   },
   {
@@ -89,7 +89,7 @@ const MOCK_BOOKS = [
     "price": 549,
     "rating": 4.8,
     "stock": 14,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/51w7c-kC8NL._SX323_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "A lone astronaut must save the earth from disaster in this incredible novel from the author of The Martian. An edge-of-your-seat science-fiction thriller."
   },
   {
@@ -100,7 +100,7 @@ const MOCK_BOOKS = [
     "price": 299,
     "rating": 4.7,
     "stock": 40,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/51Z0nLAfLmL._SX331_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "A gorgeous fable about following your dreams. This inspiring story tells the tale of Santiago, an Andalusian shepherd boy who yearns to travel in search of a worldly treasure."
   },
   {
@@ -111,7 +111,7 @@ const MOCK_BOOKS = [
     "price": 349,
     "rating": 4.8,
     "stock": 22,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/51h1Tssi3mL._SX324_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "A timeless classic exploring human behavior, class, courage, and compassion, through the eyes of young Scout Finch in the Deep South."
   },
   {
@@ -122,7 +122,7 @@ const MOCK_BOOKS = [
     "price": 399,
     "rating": 4.8,
     "stock": 35,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/41r6F2LRf8L._SX323_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "Timeless lessons on wealth, greed, and happiness. Doing well with money isn't necessarily about what you know. It's about how you behave."
   },
   {
@@ -133,7 +133,7 @@ const MOCK_BOOKS = [
     "price": 599,
     "rating": 4.5,
     "stock": 10,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/41b1dZFt3RL._SX322_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "A revolutionary exploration of the mind. Kahneman explains the two systems that drive the way we think: System 1 (fast, intuitive, emotional) and System 2 (slower, more deliberative, logical)."
   },
   {
@@ -144,7 +144,7 @@ const MOCK_BOOKS = [
     "price": 1299,
     "rating": 4.9,
     "stock": 7,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/51Z9P-1T5FL._SX379_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "The big ideas behind reliable, scalable, and maintainable systems. This book helps you navigate the diverse and fast-changing landscape of databases, queues, and processing engines."
   },
   {
@@ -155,7 +155,7 @@ const MOCK_BOOKS = [
     "price": 449,
     "rating": 4.4,
     "stock": 15,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/51L-d2d%2BgHL._SX321_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "The matrix-defining cyberpunk classic. William Gibson's award-winning masterpiece remains a seminal work of sci-fi that imagined the digital world before the internet existed."
   },
   {
@@ -166,7 +166,7 @@ const MOCK_BOOKS = [
     "price": 279,
     "rating": 4.6,
     "stock": 28,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/51G39mK7tRL._SX310_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "The quintessential novel of the Jazz Age. Gatsby's fabulous parties, his desperate love for Daisy Buchanan, and the tragic vanity of the American Dream."
   },
   {
@@ -177,7 +177,7 @@ const MOCK_BOOKS = [
     "price": 699,
     "rating": 4.8,
     "stock": 11,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/41-lS5vG8SL._SX331_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "A comprehensive deep-dive into JavaScript. Simpson explores scope, closures, objects, prototypes, types, and grammar in an approachable yet extremely thorough manner."
   },
   {
@@ -188,7 +188,7 @@ const MOCK_BOOKS = [
     "price": 549,
     "rating": 4.6,
     "stock": 19,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/41E9-kY0eGL._SX326_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "Why some companies make the leap... and others don't. Collins and his team identify the key characteristics of companies that transition from mediocre performance to greatness."
   },
   {
@@ -199,7 +199,7 @@ const MOCK_BOOKS = [
     "price": 420,
     "rating": 4.7,
     "stock": 24,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/416T0G4yD1L._SX324_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "How great leaders inspire everyone to take action. Simon Sinek shows that the leaders who've had the greatest influence in the world all think, act, and communicate the same way — and it's the opposite of everyone else."
   },
   {
@@ -210,7 +210,7 @@ const MOCK_BOOKS = [
     "price": 499,
     "rating": 4.7,
     "stock": 16,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/41zSjPpejIL._SX304_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "The legendary saga of the fall and rebirth of galactic civilization. Foundation tells the story of Hari Seldon, who uses psychohistory to predict the collapse of the Galactic Empire."
   },
   {
@@ -221,7 +221,7 @@ const MOCK_BOOKS = [
     "price": 299,
     "rating": 4.9,
     "stock": 33,
-    "image": "https://images-na.ssl-images-amazon.com/images/I/41VjU7tJmPL._SX327_BO1,204,203,200_.jpg",
+    "image": "assets/images/icons/book.png",
     "description": "The classic tribute to hope from the Holocaust. Psychiatrist Viktor Frankl's memoir of his struggle for survival in Auschwitz, and his psychotherapeutic method for finding meaning."
   }
 ];
@@ -241,7 +241,7 @@ const MOCK_USERS = [
     "email": "john@example.com",
     "password": "Password123",
     "phone": "+1 234 567 890",
-    "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150",
+    "avatar": "assets/images/icons/user.png",
     "addresses": [
       {
         "id": 101,
@@ -276,7 +276,7 @@ const BASE_URL = 'http://localhost:8080/book_store_backend';
 function mapBackendBook(book) {
   if (book.title) return book; // Already in frontend format
 
-  let imagePath = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80';
+  let imagePath = 'assets/images/icons/book.png';
   if (book.book_photo) {
     if (book.book_photo.startsWith('http')) {
       imagePath = book.book_photo;
@@ -285,7 +285,7 @@ function mapBackendBook(book) {
     }
   } else if (book.book_name) {
     // Attempt fallback based on book name
-    imagePath = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=300&q=80';
+    imagePath = 'assets/images/icons/book.png';
   }
 
   return {
