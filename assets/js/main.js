@@ -103,14 +103,21 @@ function getFooterHTML() {
           <div class="footer-brand">
             <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 8px;">
               <img src="assets/images/logos/logo.png" alt="Logo" class="logo-icon" style="height: 32px; width: auto; vertical-align: middle;">
-              Book<span>Heaven</span>
+              <span id="dyn-footer-company">BookHeaven</span>
             </a>
-            <p>Your ultimate destination for discovering great authors, inspiring stories, and life-changing academic knowledge. Find your next favorite read today.</p>
+            <p id="dyn-footer-tagline">Your ultimate destination for discovering great authors, inspiring stories, and life-changing academic knowledge.</p>
+            
+            <div class="footer-contact-info" style="margin-top: 1.5rem; margin-bottom: 2rem;">
+              <p style="margin-bottom: 0.5rem; color: #a4a7cf;"><i class="ri-map-pin-line" style="color: var(--primary-color); margin-right: 8px;"></i> <span id="dyn-footer-address">123 Library Way, Knowledge City</span></p>
+              <p style="margin-bottom: 0.5rem; color: #a4a7cf;"><i class="ri-mail-line" style="color: var(--primary-color); margin-right: 8px;"></i> <a href="mailto:support@bookheaven.com" id="dyn-footer-email" style="color: inherit;">support@bookheaven.com</a></p>
+              <p style="margin-bottom: 0.5rem; color: #a4a7cf;"><i class="ri-phone-line" style="color: var(--primary-color); margin-right: 8px;"></i> <a href="tel:+18001234567" id="dyn-footer-phone" style="color: inherit;">+1 (800) 123-4567</a></p>
+            </div>
+
             <div class="social-links">
               <a href="#" class="social-btn" title="Facebook"><i class="ri-facebook-fill"></i></a>
-              <a href="#" class="social-btn" title="Twitter"><i class="ri-twitter-fill"></i></a>
+              <a href="#" class="social-btn" title="Twitter"><i class="ri-twitter-x-line"></i></a>
               <a href="#" class="social-btn" title="Instagram"><i class="ri-instagram-line"></i></a>
-              <a href="#" class="social-btn" title="YouTube"><i class="ri-youtube-fill"></i></a>
+              <a href="#" class="social-btn" title="LinkedIn"><i class="ri-linkedin-fill"></i></a>
             </div>
           </div>
 
@@ -118,10 +125,10 @@ function getFooterHTML() {
           <div class="footer-col">
             <h4 class="footer-heading">Quick Links</h4>
             <ul class="footer-links">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="books.html">Browse Catalog</a></li>
-              <li><a href="about.html">About BookHeaven</a></li>
-              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="index.html"><i class="ri-arrow-right-s-line"></i> Home</a></li>
+              <li><a href="books.html"><i class="ri-arrow-right-s-line"></i> Browse Catalog</a></li>
+              <li><a href="about.html"><i class="ri-arrow-right-s-line"></i> About Us</a></li>
+              <li><a href="contact.html"><i class="ri-arrow-right-s-line"></i> Contact</a></li>
             </ul>
           </div>
 
@@ -129,30 +136,33 @@ function getFooterHTML() {
           <div class="footer-col">
             <h4 class="footer-heading">Support</h4>
             <ul class="footer-links">
-              <li><a href="profile.html">My Account</a></li>
-              <li><a href="orders.html">Order Status</a></li>
-              <li><a href="wishlist.html">Wishlist</a></li>
-              <li><a href="contact.html">Help & FAQ</a></li>
+              <li><a href="profile.html"><i class="ri-arrow-right-s-line"></i> My Account</a></li>
+              <li><a href="orders.html"><i class="ri-arrow-right-s-line"></i> Order Status</a></li>
+              <li><a href="wishlist.html"><i class="ri-arrow-right-s-line"></i> Wishlist</a></li>
+              <li><a href="contact.html"><i class="ri-arrow-right-s-line"></i> Help & FAQ</a></li>
             </ul>
           </div>
 
           <!-- Newsletter subscription -->
           <div class="footer-newsletter">
-            <h4 class="footer-heading">Newsletter</h4>
+            <h4 class="footer-heading">Join Our Newsletter</h4>
             <p>Subscribe to receive updates on newly arrived books, exclusive deals, and exciting seasonal campaigns.</p>
-            <form class="newsletter-form" id="footer-newsletter-form">
-              <input type="email" placeholder="Your Email Address" required>
-              <button class="btn btn-primary" type="submit">Subscribe Now</button>
+            <form class="newsletter-inline-form" id="footer-newsletter-form" onsubmit="event.preventDefault();">
+              <input type="email" placeholder="Email Address..." required>
+              <button class="btn btn-primary" type="submit" aria-label="Subscribe">
+                <i class="ri-send-plane-fill"></i>
+              </button>
             </form>
           </div>
         </div>
 
         <!-- Copyright and Legal -->
         <div class="footer-bottom">
-          <p>&copy; 2026 BookHeaven Online Bookstore. All rights reserved.</p>
+          <p>&copy; 2026 <span id="dyn-footer-copyright-company">BookHeaven</span>. All rights reserved.</p>
           <div class="footer-bottom-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
           </div>
         </div>
       </div>
@@ -278,6 +288,47 @@ function initFooterActions() {
         Toast.success('Thanks for subscribing to our newsletter!');
         form.reset();
       }
+    });
+  }
+
+  // Fetch and bind footer data dynamically
+  if (window.API && typeof window.API.getAboutUs === 'function') {
+    window.API.getAboutUs().then(aboutData => {
+      if (aboutData) {
+        const companyName = aboutData.company_name || 'BookHeaven';
+        const tagline = aboutData.company_description;
+        
+        if (aboutData.address) {
+          const addrEl = document.getElementById('dyn-footer-address');
+          if (addrEl) addrEl.textContent = aboutData.address;
+        }
+        if (aboutData.email_id) {
+          const emailEl = document.getElementById('dyn-footer-email');
+          if (emailEl) {
+            emailEl.textContent = aboutData.email_id;
+            emailEl.href = 'mailto:' + aboutData.email_id;
+          }
+        }
+        if (aboutData.phone_no) {
+          const phoneEl = document.getElementById('dyn-footer-phone');
+          if (phoneEl) {
+            phoneEl.textContent = aboutData.phone_no;
+            phoneEl.href = 'tel:' + aboutData.phone_no;
+          }
+        }
+        if (companyName) {
+          const comp1 = document.getElementById('dyn-footer-company');
+          const comp2 = document.getElementById('dyn-footer-copyright-company');
+          if (comp1) comp1.textContent = companyName;
+          if (comp2) comp2.textContent = companyName;
+        }
+        if (tagline) {
+          const tagEl = document.getElementById('dyn-footer-tagline');
+          if (tagEl) tagEl.textContent = tagline;
+        }
+      }
+    }).catch(err => {
+      console.warn('Could not load dynamic footer info', err);
     });
   }
 }

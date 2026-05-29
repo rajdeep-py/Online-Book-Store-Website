@@ -1,9 +1,22 @@
 .footer {
-  background-color: var(--dark-color);
-  color: #c9c9d5;
+  background-color: #0A0A0A;
+  color: #a4a7cf;
   padding: 5rem 0 2rem 0;
   margin-top: auto;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  opacity: 0.3;
 }
 
 .footer-top {
@@ -77,13 +90,29 @@
 }
 
 .footer-links a {
-  color: #9da0bd;
-  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  color: #a4a7cf;
+  font-size: 0.95rem;
   transition: var(--transition);
 }
 
-.footer-links a:hover {
+.footer-links a i {
   color: var(--primary-color);
+  transition: var(--transition);
+  opacity: 0;
+  transform: translateX(-10px);
+  margin-right: -10px;
+}
+
+.footer-links a:hover i {
+  opacity: 1;
+  transform: translateX(0);
+  margin-right: 5px;
+}
+
+.footer-links a:hover {
+  color: var(--light-color);
   padding-left: 5px;
 }
 
@@ -93,31 +122,49 @@
   margin-bottom: 1.5rem;
 }
 
-.newsletter-form {
-  position: relative;
+.newsletter-inline-form {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  position: relative;
+  width: 100%;
 }
 
-.newsletter-form input {
-  padding: 0.8rem 1rem;
-  background-color: rgba(255, 255, 255, 0.05);
+.newsletter-inline-form input {
+  width: 100%;
+  padding: 1rem 3.5rem 1rem 1.25rem;
+  background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--light-color);
-  border-radius: var(--border-radius-sm);
+  border-radius: 50px;
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   transition: var(--transition);
 }
 
-.newsletter-form input:focus {
+.newsletter-inline-form input:focus {
+  background-color: rgba(255, 255, 255, 0.06);
   border-color: var(--primary-color);
-  background-color: rgba(255, 255, 255, 0.08);
+  outline: none;
+  box-shadow: 0 0 15px rgba(108, 99, 255, 0.1);
 }
 
-.newsletter-form button {
-  width: 100%;
+.newsletter-inline-form button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  bottom: 5px;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 4px 10px rgba(108, 99, 255, 0.2);
+}
+
+.newsletter-inline-form button i {
+  font-size: 1.2rem;
 }
 
 .footer-bottom {
