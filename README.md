@@ -1,159 +1,118 @@
-# 📚 BookHeaven - Premium Online Bookstore
+# BookHeaven - Online Book Store
 
-A production-ready, highly interactive, and visually stunning e-commerce storefront for an **Online Bookstore**. Built entirely with **Semantic HTML5, CSS3, and Modular ES6 Vanilla JavaScript** (no frameworks, no external libraries). This storefront features elegant dark-contrast accents, custom glassmorphism overlays, smooth transitions, and high-performance micro-animations.
+**A modern, premium, full-featured frontend e-commerce platform for book lovers.**
 
-The application utilizes a **Dual-Protocol API Service** which runs on asynchronous standard `fetch()` requests when hosted on active servers and falls back seamlessly to preloaded database arrays when opened locally as static files (`file:///...`), completely bypassing browser CORS blockades.
-
----
-
-## 🌟 Core Features
-
-1. **Dynamic Catalog & Search Engine**: 
-   Instant keypress searching by book title or author. Displays reactive search matching results in a highly premium book card layout.
-2. **Category & Price Range Filters**:
-   Filter catalog items on the fly using category checkboxes (Self-Help, Business, Tech, Fiction) and dynamic price range slider controls.
-3. **Immersive Product Details Page**:
-   Renders detailed descriptions, publishing specifications, real-time stock alert indicators, dynamic star-rating aggregates, and detailed user reviews.
-4. **Modernized Shopping Cart Experience**:
-   Features a 3-stage visual checkout progress stepper, visual left-accent borders, card translation sliding animations, pill-shaped quantity adjusters, and animated removal trash bin triggers.
-5. **Flexible Promo Coupon Engine**:
-   Simulates active discounts. Applying coupon `BOOKNEW10` triggers a flat 10% subtotal subtraction. Orders with subtotals above ₹1,000 receive automatic free shipping; others incur a standard ₹60 delivery fee.
-6. **Secure Billing Checkout**:
-   Form validation checks shipping info, payment selections (Card or Cash on Delivery), and expiration formats before finalizing orders.
-7. **Simulated Authentication Session**:
-   State-persisted login (`john@example.com` / `Password123`) and registration forms backed by `localStorage`.
-8. **Interactive User Profile Dashboard**:
-   Update profile information, add multiple shipping addresses, edit billing credentials, and select map coordinates.
-9. **Real-time Order History Tracker**:
-   Tracks order dates, pre-calculated totals, delivery milestones, status trackers, and purchased item list components.
-10. **Wishlist Bookmarks**:
-    Favorite/unfavorite books instantly. Wishlist and Cart badges in the navigation bar update dynamically across all pages.
-11. **Responsive Glassmorphic Contact & About Us Cards**:
-    Home About Us collage stack displays perfectly on mobile. The Contact page includes a simulated pulsing map coordinates box and highly responsive form fields.
-12. **100% Mobile Responsive Design**:
-    Tailored media queries for small smartphones (iPhones, Androids), tablets (iPads), large laptops, and high-resolution monitors.
+## 📖 Table of Contents
+1. [Project Overview](#1-project-overview)
+2. [Key Features](#2-key-features)
+3. [File & Directory Structure](#3-file--directory-structure)
+4. [Core Javascript Modules & Functions](#4-core-javascript-modules--functions)
+5. [Backend Integration Details](#5-backend-integration-details)
+6. [Developer Team](#6-developer-team)
+7. [Future Implementations](#7-future-implementations)
 
 ---
 
-## 🛠️ Technology Stack
-
-* **Structure**: Semantic HTML5 Markup.
-* **Styles**: Vanilla CSS3 (CSS Variables, Grid, Flexbox, Glassmorphism, animations).
-* **Logic**: Vanilla ES6 JavaScript (Modular scripts, `localStorage` DB persistence).
-* **Vectors & Icons**: Remix Icon Web Fonts (loaded via lightweight CDN).
-* **Fonts**: Google Fonts (`Inter` for reading text; `Outfit` for strong headings).
+## 1. Project Overview
+BookHeaven is an aesthetically modern, visually engaging web application built for browsing, purchasing, and discussing books. The project strictly follows vanilla HTML, CSS, and JavaScript to maintain lightweight, blazing-fast load times without the overhead of heavy frameworks (like React or Angular). It utilizes custom-built components, robust CSS variables (design tokens), and sleek glassmorphic UI patterns.
 
 ---
 
-## 📂 File & Directory Architecture
+## 2. Key Features
+- **3D Interactive Hero Section**: Uses Sketchfab iframe integration to render a beautiful, interactive 3D vintage bookstore scene right on the landing page.
+- **Premium Glassmorphic UI**: Extensive use of `backdrop-filter: blur()`, semi-transparent backgrounds, and soft drop-shadows to create a premium, modern aesthetic.
+- **Dynamic Component Injection**: Modular JS renders components like book cards, skeleton loaders, and toast notifications dynamically via Template Literals, eliminating dead HTML files.
+- **Full E-Commerce Flow**: Comprehensive user flows including Browsing -> Searching -> Wishlist -> Cart -> Checkout -> Orders History.
+- **Authentication System**: Login, Register, and Profile Management with session storage and backend syncing.
+- **API Resilience (Offline Mode)**: Designed to connect to a Java/Spring REST API, but gracefully falls back to in-memory mock data if the backend is unreachable or if running via the `file://` protocol.
+
+---
+
+## 3. File & Directory Structure
 
 ```text
 website_frontend/
-├── index.html                  # Homepage (Best Sellers, Categories, Testimonials, About Us)
-├── books.html                  # Catalog Browsing, Search, and Category Filtering
-├── book-details.html           # Specifications, Rating Aggregates, and User Reviews
-├── cart.html                   # Shopping Bag, Stepper Progress, and Promo Codes
-├── checkout.html               # Billing Credentials, Payment Selection, Secure Order Form
-├── login.html                  # Sign In Simulation
-├── register.html               # Sign Up Simulation
-├── profile.html                # User Settings, Address Management, Coordinates Selection
-├── orders.html                 # Order History Logs and Status Milestones
-├── wishlist.html               # Favorite Bookmarks Panel
-├── about.html                  # Detailed Corporate Company Profile
-├── contact.html                # Pulsing HQ Map coordinates and Support Ticket Form
-├── README.md                   # Project Handover Documentation
-│
-├── components/                 # Shared Visual Component Templates
-│   ├── navbar.html             # Global Sticky Navigation Drawer Overlay
-│   ├── footer.html             # Corporate Directory and Newsletter forms
-│   ├── modal.html              # Address edit dialogue layouts
-│   ├── loader.html             # In-app loader spinner visualizer
-│   └── toast.html              # Custom in-app Toast notification panel
-│
+├── index.html                 # Landing page with 3D model, popular books, and testimonials
+├── about.html                 # Company info, team members, mission, and publishing partners
+├── books.html                 # Main book catalog with filtering and search
+├── book-details.html          # Single book view with description, author, and add-to-cart
+├── cart.html                  # Shopping cart interface
+├── checkout.html              # Payment and shipping address form
+├── contact.html               # Contact form and address/map integration
+├── login.html & register.html # Authentication pages
+├── profile.html & orders.html # User account management and history
+├── wishlist.html              # User's saved books
+├── components/                # Reusable snippet containers (e.g., loader.html)
 └── assets/
-    ├── data/
-    │   └── books.json          # Offline Book Database (Double-Protocol fallbacks)
-    │
-    ├── css/
-    │   ├── style.css           # Global resets, harmonized colors, and variables
-    │   ├── navbar.css          # Sticky headers and sliding overlay menus
-    │   ├── footer.css          # Legal columns and quick links
-    │   ├── home.css            # Hero sections, overlays, and About Us collage styles
-    │   ├── books.css           # Catalog layouts, filter sidebar checkbox grids
-    │   ├── details.css         # Star reviews, specs grids, and stock notifications
-    │   ├── cart.css            # checkout stepper, pill adjustments, and trash scales
-    │   ├── checkout.css        # Card details and billing summaries
-    │   ├── profile.css         # Sidebar dashboards and address modal styling
-    │   ├── contact.css         # Glassmorphic detail cards, simulated map pins
-    │   ├── auth.css            # Sign In/Create Account card aesthetics
-    │   ├── utilities.css       # Unified paddings, generic cards, and button templates
-    │   ├── animations.css      # Fade-ins, pulsing pin animations, loading keyframes
-    │   └── responsive.css      # Comprehensive Smartphone, iPad, and Desktop breakpoint engine
-    │
-    └── js/
-        ├── utils.js            # Storage wrappers, custom Loader, and dynamic Toasts
-        ├── api.js              # Dual-protocol asynchronous CORS fallback resolver
-        ├── validation.js       # Real-time CSS form error/success validation markers
-        ├── main.js             # Shared navbar injection, dropdown panels, active indicators
-        ├── books.js            # Catalog filters render, card click detail redirection
-        ├── book-details.js     # Detail stock tracking and review injection
-        ├── cart.js             # Cart management, Promo Code apply calculation algorithms
-        ├── checkout.js         # Placed orders creation, localStorage user databases updates
-        ├── profile.js          # shipping addresses CRUD actions and local overlays
-        ├── wishlist.js         # Favorites bookmarks toggler
-        └── auth.js             # Credentials verification, local session controllers
+    ├── css/                   # Modularized CSS (home, style, navbar, footer, auth, utilities)
+    ├── images/                # Static assets, logos, local fallback icons
+    └── js/                    # Modularized Vanilla JS application logic
 ```
 
 ---
 
-## 🚀 How to Clone and Run the Project
+## 4. Core Javascript Modules & Functions
 
-### 1. Clone this Repository
-Clone the repository using Git:
-```bash
-git clone https://github.com/your-username/online-bookstore.git
-```
-Navigate into the directory:
-```bash
-cd online-bookstore/website_frontend
-```
+The application logic is separated into purpose-specific JavaScript files, keeping the codebase clean and maintainable.
 
-### 2. Run the Application
+### `api.js` (The Data Layer)
+The central nervous system of data fetching and API connectivity.
+- `API.request(endpoint, options)`: Generic wrapper for fetch calls to `BASE_URL`.
+- `API.getBooks()`, `API.login()`, `API.getAboutUs()`: Domain-specific endpoints.
+- **Offline Fallback Mechanism**: Intercepts `TypeError: Failed to fetch` errors and routes the request to internal hardcoded mock promises (`MOCK_BOOKS`, `MOCK_USERS`).
 
-#### Option A: Running Completely Offline (No Active Server)
-Since the Bookstore is designed using a custom **Dual-Protocol API Service**, you do not need to host it on a server! You can double-click **`index.html`** or open it directly in any browser (`file:///...`). All book details, search listings, and filtering actions will run completely offline.
+### `utils.js` (Global Utilities)
+Helper methods used across the entire application.
+- `Storage`: Wrapper around `localStorage` and `sessionStorage` (`Storage.get`, `Storage.set`).
+- `Toast`: Dynamic toast notification generator (`Toast.show(message, type)`).
+- `Loader`: Dynamic full-screen loading spinner (`Loader.show()`, `Loader.hide()`).
+- `Currency`: Price formatting logic (`Currency.format(amount)`).
 
-#### Option B: Running with a Local Static Server (Recommended)
-To run the project in a simulated production environment (which resolves components like `navbar.html` and `footer.html` asynchronously using active HTTP protocols), you can serve the directory using a lightweight static server.
+### `main.js` (Application Initializer)
+Handles global DOM events and layout initializations.
+- `initNavbarActions()`: Scroll events for the floating, transparent-to-solid animated navbar.
+- `initFooterActions()`: Binds API data (company info, address) dynamically to the footer.
 
-**Using Node.js (`npx`):**
-```bash
-npx http-server -p 8000
-```
+### `books.js` & `cart.js` (E-Commerce Logic)
+- `Books.createBookCard(book)`: Returns the dynamic HTML string for a reusable book item.
+- `Cart.add()`, `Cart.remove()`, `Cart.updateQuantity()`: Mutates the global cart state and instantly updates local storage and the DOM counter.
 
-**Using Python:**
-```bash
-python -m http.server 8000
-```
-
-**Using PHP:**
-```bash
-php -S localhost:8000
-```
-
-After launching your server, open your browser and navigate to:
-👉 **[http://localhost:8000/index.html](http://localhost:8000/index.html)**
+### `auth.js` & `profile.js` (Identity Management)
+- Controls session flow, sets user contexts, handles login/registration validation, and secures protected pages by kicking unauthenticated users back to `login.html`.
 
 ---
 
-## 🔑 Preloaded Test Credentials
+## 5. Backend Integration Details
 
-For user authentication and promo code simulations, the following credentials are pre-configured:
+The frontend is designed to natively hook into a backend REST API.
+- **Base URL**: `http://localhost:8080/book_store_backend`
+- **Data Exchange**: Standard `application/json` format.
+- **Authentication**: JWT / Token-based. The frontend expects auth tokens to be managed by the backend or stored locally.
+- **Resilience**: If the Java backend is turned off, the frontend will automatically serve local fallback data without crashing. 
+- **Image Fallbacks**: The frontend relies entirely on secure, local fallback images (`assets/images/icons/book.png` and `assets/images/icons/user.png`) preventing any broken images if external CDNs go down.
 
-* **Simulated User Account:**
-  * **Email:** `john@example.com`
-  * **Password:** `Password123`
-* **Subtotal Coupon Code:**
-  * **Code:** `BOOKNEW10` (Yields a flat **10% discount** on your checkout subtotal).
-* **Free Delivery Limit:**
-  * Subtotals above **₹1,000** receive **Free Shipping**; otherwise, a flat **₹60** shipping fee is appended.
+---
+
+## 6. Developer Team
+
+- **Raj** - *Head of Curation*
+  - Visionary and content strategist. Handpicks the catalog and curates the aesthetic direction of the bookstore.
+- **Rajdeep** - *Lead Developer*
+  - Software architecture and implementation. Handles the Vanilla JS integration, API connections, and core e-commerce logic.
+- **Srijani** - *Customer Experience*
+  - UI/UX and user flows. Ensures that the glassmorphic layouts, animations, and typography create a frictionless white-glove experience.
+
+---
+
+## 7. Future Implementations (Roadmap)
+
+1. **Live Payment Gateway Integration**: 
+   Wire up `checkout.js` with Stripe, PayPal, or Razorpay APIs for live transaction handling and order processing.
+2. **Server-Side Pagination & Filtering**: 
+   Move client-side filtering (`filter.js`) to the backend to support massive catalogs via Server-Side Pagination and advanced search indexing (e.g., Elasticsearch).
+3. **Global Dark Mode Toggle**: 
+   Expand the current CSS variables to support a global, user-toggled dark mode theme that persists via `localStorage`.
+4. **WebSockets for Live Chat**: 
+   Add a persistent customer support floating widget using WebSockets for real-time communication with admins.
+5. **Progressive Web App (PWA)**: 
+   Add a `manifest.json` and a Service Worker to allow users to install BookHeaven locally on their mobile devices and support offline catalog viewing.
