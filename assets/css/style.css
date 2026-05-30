@@ -366,8 +366,8 @@ img {
 }
 
 .book-card-image-box {
-  background-color: var(--secondary-color);
-  height: 240px;
+  background-color: #faf9f7;
+  height: 260px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -443,8 +443,9 @@ img {
 }
 
 .book-card-title {
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 800;
   margin-bottom: 0.3rem;
   line-height: 1.3;
 }

@@ -8,7 +8,7 @@
   
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/navbar.css?v=5">
-  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/footer.css?v=2">
   <link rel="stylesheet" href="assets/css/details.css">
   <link rel="stylesheet" href="assets/css/utilities.css">
   <link rel="stylesheet" href="assets/css/animations.css">
@@ -20,17 +20,6 @@
 
   <main class="page-content">
     
-    <!-- Dynamic Breadcrumb -->
-    <div class="breadcrumb-wrapper">
-      <div class="container">
-        <ul class="breadcrumb">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="books.html">Catalog</a></li>
-          <li id="breadcrumb-category">Genre</li>
-          <li id="breadcrumb-title">Book Title</li>
-        </ul>
-      </div>
-    </div>
 
     <!-- Product Details Main container -->
     <section class="container details-wrapper">
@@ -164,7 +153,7 @@
   <script src="assets/js/utils.js"></script>
   <script src="assets/js/api.js"></script>
   <script src="assets/js/validation.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=5"></script>
   <script src="assets/js/books.js"></script>
   <script src="assets/js/cart.js"></script>
   <script src="assets/js/wishlist.js"></script>
@@ -188,9 +177,7 @@
 
         CURRENT_BOOK = book;
 
-        // Populate Breadcrumbs & Title details
-        document.getElementById('breadcrumb-category').textContent = book.category;
-        document.getElementById('breadcrumb-title').textContent = book.title;
+        // Populate Title details
         document.title = `${book.title} - BookHeaven`;
 
         // Image

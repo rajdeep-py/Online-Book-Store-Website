@@ -280,8 +280,6 @@ function initFooterActions() {
     window.API.getAboutUs().then(aboutData => {
       if (aboutData) {
         const companyName = aboutData.company_name || 'BookHeaven';
-        const tagline = aboutData.company_description;
-        
         if (aboutData.address) {
           const addrEl = document.getElementById('dyn-footer-address');
           if (addrEl) addrEl.textContent = aboutData.address;
@@ -305,10 +303,6 @@ function initFooterActions() {
           const comp2 = document.getElementById('dyn-footer-copyright-company');
           if (comp1) comp1.textContent = companyName;
           if (comp2) comp2.textContent = companyName;
-        }
-        if (tagline) {
-          const tagEl = document.getElementById('dyn-footer-tagline');
-          if (tagEl) tagEl.textContent = tagline;
         }
       }
     }).catch(err => {

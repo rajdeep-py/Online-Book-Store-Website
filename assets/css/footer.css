@@ -29,7 +29,7 @@
 }
 
 .footer-brand .logo {
-  color: var(--light-color);
+  color: #C79038;
   margin-bottom: 1.5rem;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .footer-heading {
-  color: var(--light-color);
+  color: #C79038;
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
