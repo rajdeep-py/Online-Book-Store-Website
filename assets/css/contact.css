@@ -230,3 +230,12 @@
   border-radius: 4px;
   font-weight: 500;
 }
+
+/* Mobile Responsiveness for Contact Section */
+@media (max-width: 1024px) {
+  .contact-layout-grid {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2.5rem;
+  }
+}
