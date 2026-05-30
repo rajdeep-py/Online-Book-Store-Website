@@ -47,7 +47,14 @@ const Books = {
             <span class="rating-number">${book.rating}</span>
           </div>
           <div class="book-card-footer">
-            <span class="book-card-price">₹${book.price}</span>
+            <div class="book-card-price-container" style="display: flex; align-items: center; flex-wrap: wrap;">
+              ${book.originalPrice && book.originalPrice > book.price 
+                ? `<span class="book-card-price" style="color:var(--primary-color);">₹${Number(book.price).toFixed(2)}</span>
+                   <span class="book-card-discount" style="color:#d32f2f; background:rgba(211, 47, 47, 0.1); padding: 2px 6px; border-radius:4px; font-size:0.75rem; margin-left:6px; font-weight:700; letter-spacing:0.5px;">${Number(book.discountPercent).toFixed(2)}% OFF</span>
+                   <span class="book-card-price-original" style="text-decoration:line-through; font-size:0.85rem; color:rgba(62, 39, 35, 0.5); margin-left:6px;">₹${Number(book.originalPrice).toFixed(2)}</span>`
+                : `<span class="book-card-price" style="color:var(--primary-color);">₹${Number(book.price).toFixed(2)}</span>`
+              }
+            </div>
             <button class="btn btn-primary add-to-cart-btn" data-id="${book.id}">
               <i class="ri-shopping-bag-line"></i> Add
             </button>

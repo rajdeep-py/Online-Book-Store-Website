@@ -7,7 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/navbar.css?v=5">
   <link rel="stylesheet" href="assets/css/footer.css">
   <link rel="stylesheet" href="assets/css/details.css">
   <link rel="stylesheet" href="assets/css/utilities.css">
@@ -100,49 +100,59 @@
         </div>
       </div>
 
-      <!-- Technical Specifications Section -->
-      <div class="specs-section">
-        <h3 class="specs-title">Book Specifications</h3>
-        <table class="specs-table">
-          <tr>
-            <th>Author</th>
-            <td id="spec-author">James Clear</td>
-          </tr>
-          <tr>
-            <th>Publisher</th>
-            <td>BookHeaven Publications Ltd.</td>
-          </tr>
-          <tr>
-            <th>Category / Genre</th>
-            <td id="spec-category">Self Help</td>
-          </tr>
-          <tr>
-            <th>Print Length</th>
-            <td id="spec-pages">320 Pages</td>
-          </tr>
-          <tr>
-            <th>Language</th>
-            <td>English</td>
-          </tr>
-          <tr>
-            <th>ISBN-13</th>
-            <td id="spec-isbn">978-0735211292</td>
-          </tr>
-        </table>
-      </div>
-
       <!-- Related Suggestions Carousel Grid -->
-      <div class="related-books-section">
-        <div class="section-header">
-          <div class="section-title">
-            <h2>You May Also Like</h2>
-            <p>Check out other books from this genre that you might enjoy reading.</p>
+      <div class="related-books-section" style="background: #ffffff; padding: 4rem 2rem; border-radius: 16px; margin-top: 4rem; box-shadow: 0 15px 40px rgba(62, 39, 35, 0.08);">
+        <div class="section-header" style="text-align: center; margin-bottom: 2.5rem;">
+          <div class="section-title" style="margin: 0 auto;">
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary-color); font-size: 2.4rem; font-weight: 700; text-transform: capitalize; letter-spacing: 1px;">You May Also Like</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 0.8rem; font-family: 'Lora', serif; font-style: italic;">Check out other books from this genre that you might enjoy reading.</p>
           </div>
         </div>
-        <div class="featured-books-grid" id="related-books-grid">
+        <div class="swipeable-books-container" id="related-books-grid">
           <!-- Populated dynamically -->
         </div>
       </div>
+
+      <style>
+        .swipeable-books-container {
+          display: flex;
+          overflow-x: auto;
+          gap: 1.5rem;
+          padding-bottom: 2rem;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin;
+          scrollbar-color: var(--primary-color) rgba(62, 39, 35, 0.1);
+        }
+        
+        .swipeable-books-container::-webkit-scrollbar {
+          height: 8px;
+        }
+        .swipeable-books-container::-webkit-scrollbar-track {
+          background: rgba(62, 39, 35, 0.05);
+          border-radius: 10px;
+        }
+        .swipeable-books-container::-webkit-scrollbar-thumb {
+          background: var(--primary-color);
+          border-radius: 10px;
+        }
+
+        /* Premium cards specific to this white section */
+        .swipeable-books-container .book-card {
+          flex: 0 0 280px;
+          scroll-snap-align: start;
+          margin-bottom: 0;
+          background: #ffffff;
+          border: 1px solid rgba(62, 39, 35, 0.08);
+          box-shadow: 0 10px 25px rgba(62, 39, 35, 0.05);
+          border-radius: 12px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .swipeable-books-container .book-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 35px rgba(62, 39, 35, 0.12);
+        }
+      </style>
 
     </section>
 
@@ -192,17 +202,20 @@
         document.getElementById('detail-title').textContent = book.title;
         document.getElementById('detail-author').innerHTML = `By <span>${book.author}</span>`;
         document.getElementById('detail-desc').textContent = book.description;
-        document.getElementById('detail-price-val').textContent = `₹${book.price}`;
+        if (book.originalPrice && book.originalPrice > book.price) {
+          document.getElementById('detail-price-val').innerHTML = `
+            <span style="font-size:2.2rem; font-weight:700; color:var(--primary-color);">₹${Number(book.price).toFixed(2)}</span>
+            <span style="color:#d32f2f; font-size:1.1rem; font-weight:700; margin-left:15px; background: rgba(211, 47, 47, 0.1); padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px;">${Number(book.discountPercent).toFixed(2)}% OFF</span>
+            <span style="text-decoration:line-through; color:var(--text-muted); font-size:1.3rem; margin-left:15px; font-weight:400;">₹${Number(book.originalPrice).toFixed(2)}</span>
+          `;
+        } else {
+          document.getElementById('detail-price-val').innerHTML = `<span style="font-size:2.2rem; font-weight:700; color:var(--primary-color);">₹${Number(book.price).toFixed(2)}</span>`;
+        }
 
         // Ratings
         document.getElementById('detail-rating-num').textContent = book.rating;
         document.getElementById('detail-rating-stars').innerHTML = Books.renderStars(book.rating);
 
-        // Technical Specs
-        document.getElementById('spec-author').textContent = book.author;
-        document.getElementById('spec-category').textContent = book.category;
-        document.getElementById('spec-pages').textContent = `${250 + (book.id * 15)} Pages`; // Simulated spec length
-        document.getElementById('spec-isbn').textContent = `978-0735${20000 + (book.id * 51)}`;
 
         // Stock Badge adjustments
         const stockBadge = document.getElementById('detail-stock-badge');
@@ -262,7 +275,7 @@
       if (!grid) return;
 
       const books = await API.getBooks();
-      const filtered = books.filter(b => b.category === category && b.id !== currentId).slice(0, 4);
+      const filtered = books.filter(b => b.category && category && b.category.toLowerCase().trim() === category.toLowerCase().trim() && b.id !== currentId);
 
       if (filtered.length > 0) {
         Books.renderList(filtered, grid);

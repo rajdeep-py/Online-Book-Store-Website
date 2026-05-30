@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="assets/css/navbar.css">
   <link rel="stylesheet" href="assets/css/footer.css">
   <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="assets/css/about.css">
   <link rel="stylesheet" href="assets/css/utilities.css">
   <link rel="stylesheet" href="assets/css/animations.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
@@ -18,42 +19,39 @@
 
   <div id="navbar-container"></div>
 
-  <main class="page-content">
+  <main>
     
-    <!-- Breadcrumbs Navigation -->
-    <div class="breadcrumb-wrapper">
-      <div class="container">
-        <ul class="breadcrumb">
-          <li><a href="index.html">Home</a></li>
-          <li>About Us</li>
-        </ul>
-      </div>
-    </div>
+    <!-- Hero Banner -->
+    <section class="about-hero-section">
+      <div class="about-hero-bg"></div>
+      <div class="container" style="position: relative; z-index: 2;">
+        
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-5 scroll-reveal">
+          <ol class="breadcrumb" style="background: transparent; padding: 0; margin: 0;">
+            <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none" style="color: rgba(255,255,255,0.7); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page" style="color: #fff; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">About Us</li>
+          </ol>
+        </nav>
 
-    <!-- About Content -->
-    <section class="container" style="padding-bottom: 5rem; position: relative;">
-      
-      <!-- Background Blobs removed -->
-
-      <!-- Hero Grid -->
-      <div class="grid-2 align-items-center mb-5 mt-4 scroll-reveal" style="grid-template-columns: 1.1fr 0.9fr; gap: 4rem;">
-        <div style="z-index: 2;">
-          <span class="badge badge-primary mb-3">Our Bookstore Story</span>
-          <h2 id="about-tagline" style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; line-height: 1.1; letter-spacing: -1px; color: var(--primary-dark);">Providing Readers with a Heavenly Library</h2>
-          <p id="about-description" class="mb-4 text-muted" style="font-size: 1.1rem; line-height: 1.8;">Founded in 2026, BookHeaven was established with a singular mission: to make high-quality literature, academic knowledge, and creative storytelling accessible to global readers in an incredibly elegant shopping environment.</p>
-        </div>
-        <div class="d-flex justify-content-center parallax-wrapper" style="height: 600px; border-radius: 24px; position: relative; z-index: 1;">
-          <img class="parallax-image" src="assets/images/icons/book.png" alt="About Books" style="border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); width: 100%; height: 120%; object-fit: cover; position: absolute; top: -10%;">
+        <div class="scroll-reveal" style="max-width: 800px;">
+          <span class="badge mb-3" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); color: #fff; padding: 0.6rem 1.2rem; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); font-weight: 600; letter-spacing: 1px;">Our Bookstore Story</span>
+          <h2 id="about-tagline" class="about-tagline">Providing Readers with a Heavenly Library</h2>
+          <p id="about-description" style="font-size: 1.15rem; line-height: 1.8; color: rgba(255,255,255,0.85); max-width: 800px; text-align: justify; margin-bottom: 2rem;">Founded in 2026, BookHeaven was established with a singular mission: to make high-quality literature, academic knowledge, and creative storytelling accessible to global readers in an incredibly elegant shopping environment.</p>
         </div>
       </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="container" style="padding-bottom: 5rem; position: relative; margin-top: 4rem;">
       
       <!-- Mission and Vision Sections -->
-      <div id="mission-vision-section" class="scroll-reveal" style="display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin: 4rem auto 6rem auto; position: relative; z-index: 5;">
+      <div id="mission-vision-section" class="scroll-reveal" style="display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin: 0 auto 6rem auto; position: relative; z-index: 5;">
         <!-- Injected dynamically via JS -->
       </div>
 
       <!-- Director Message -->
-      <div id="about-director-message" class="scroll-reveal-slow" style="background: #fff; box-shadow: 0 15px 35px rgba(0,0,0,0.08); border-radius: var(--border-radius-lg); padding: 3.5rem 2.5rem; margin: 0 auto 6rem auto; position: relative; z-index: 10; max-width: 800px; text-align: center; display: none;">
+      <div id="about-director-message" class="scroll-reveal-slow" style="margin: 0 auto 6rem auto; max-width: 900px; display: none;">
         <!-- Director message dynamic -->
       </div>
 
@@ -64,35 +62,35 @@
       </div>
 
       <div class="features-grid mb-5">
-        <div class="feature-card scroll-reveal" style="background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-radius: var(--border-radius-lg); flex-direction: column; text-align: center; padding: 3rem 2rem; border: none; transition: transform 0.3s ease;">
-          <div class="feature-icon" style="margin-bottom: 1.5rem; font-size: 2.5rem; color: var(--primary-color);"><i class="ri-heart-line"></i></div>
+        <div class="feature-card scroll-reveal">
+          <i class="ri-heart-line feature-icon"></i>
           <div class="feature-info">
-            <h4 style="margin-bottom: 0.75rem; font-weight: 700;">Reader Obsession</h4>
-            <p class="text-muted">We craft our platforms around the ease of discovering, filtering, and checking out your preferred authors.</p>
+            <h4 style="margin-bottom: 0.75rem; font-weight: 800; color: var(--primary-dark);">Reader Obsession</h4>
+            <p class="text-muted" style="line-height: 1.6;">We craft our platforms around the ease of discovering, filtering, and checking out your preferred authors.</p>
           </div>
         </div>
 
-        <div class="feature-card scroll-reveal" style="background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-radius: var(--border-radius-lg); flex-direction: column; text-align: center; padding: 3rem 2rem; border: none; transition: transform 0.3s ease; animation-delay: 0.1s;">
-          <div class="feature-icon" style="margin-bottom: 1.5rem; font-size: 2.5rem; color: var(--primary-color);"><i class="ri-award-line"></i></div>
+        <div class="feature-card scroll-reveal" style="animation-delay: 0.1s;">
+          <i class="ri-award-line feature-icon"></i>
           <div class="feature-info">
-            <h4 style="margin-bottom: 0.75rem; font-weight: 700;">Uncompromising Quality</h4>
-            <p class="text-muted">From high-end book covers to authentic verified print versions, we ensure our collections are premium assets.</p>
+            <h4 style="margin-bottom: 0.75rem; font-weight: 800; color: var(--primary-dark);">Uncompromising Quality</h4>
+            <p class="text-muted" style="line-height: 1.6;">From high-end book covers to authentic verified print versions, we ensure our collections are premium assets.</p>
           </div>
         </div>
 
-        <div class="feature-card scroll-reveal" style="background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-radius: var(--border-radius-lg); flex-direction: column; text-align: center; padding: 3rem 2rem; border: none; transition: transform 0.3s ease; animation-delay: 0.2s;">
-          <div class="feature-icon" style="margin-bottom: 1.5rem; font-size: 2.5rem; color: var(--primary-color);"><i class="ri-global-line"></i></div>
+        <div class="feature-card scroll-reveal" style="animation-delay: 0.2s;">
+          <i class="ri-global-line feature-icon"></i>
           <div class="feature-info">
-            <h4 style="margin-bottom: 0.75rem; font-weight: 700;">Global Perspective</h4>
-            <p class="text-muted">Our genres support universal subjects: from modern Silicon Valley coding methodologies to Holocaust historical memoirs.</p>
+            <h4 style="margin-bottom: 0.75rem; font-weight: 800; color: var(--primary-dark);">Global Perspective</h4>
+            <p class="text-muted" style="line-height: 1.6;">Our genres support universal subjects: from modern Silicon Valley coding methodologies to Holocaust historical memoirs.</p>
           </div>
         </div>
 
-        <div class="feature-card scroll-reveal" style="background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-radius: var(--border-radius-lg); flex-direction: column; text-align: center; padding: 3rem 2rem; border: none; transition: transform 0.3s ease; animation-delay: 0.3s;">
-          <div class="feature-icon" style="margin-bottom: 1.5rem; font-size: 2.5rem; color: var(--primary-color);"><i class="ri-magic-line"></i></div>
+        <div class="feature-card scroll-reveal" style="animation-delay: 0.3s;">
+          <i class="ri-magic-line feature-icon"></i>
           <div class="feature-info">
-            <h4 style="margin-bottom: 0.75rem; font-weight: 700;">Innovation First</h4>
-            <p class="text-muted">We continually invest in premium responsive interfaces to provide micro-animations and shimmers that delight.</p>
+            <h4 style="margin-bottom: 0.75rem; font-weight: 800; color: var(--primary-dark);">Innovation First</h4>
+            <p class="text-muted" style="line-height: 1.6;">We continually invest in premium responsive interfaces to provide micro-animations and shimmers that delight.</p>
           </div>
         </div>
       </div>
@@ -106,30 +104,30 @@
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-top: 3rem;">
           
-          <div class="team-card scroll-reveal" style="background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-radius: var(--border-radius-lg); overflow: hidden; text-align: center; transition: transform 0.3s ease;">
-            <img src="assets/images/icons/raj.png" alt="Raj" style="width: 100%; height: 350px; object-fit: cover; object-position: 50% 15%;">
-            <div style="padding: 2rem;">
-              <h4 style="margin: 0 0 0.5rem 0; font-size: 1.25rem; font-weight: 800; color: var(--primary-dark);">Raj</h4>
-              <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Head of Curation</p>
-              <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6; margin: 0;">"Finding the hidden gems in contemporary literature is my passion. Every book here is handpicked."</p>
+          <div class="team-card scroll-reveal">
+            <img src="assets/images/icons/raj.png" alt="Raj">
+            <div class="team-info-card">
+              <h4 style="margin: 0 0 0.5rem 0; font-size: 1.4rem; font-weight: 800; color: var(--primary-dark);">Raj</h4>
+              <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Head of Curation</p>
+              <p class="text-muted" style="font-size: 0.95rem; line-height: 1.5; margin: 0; font-style: italic;">"Every book here is handpicked."</p>
             </div>
           </div>
           
-          <div class="team-card scroll-reveal" style="background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-radius: var(--border-radius-lg); overflow: hidden; text-align: center; transition: transform 0.3s ease; animation-delay: 0.1s;">
-            <img src="assets/images/icons/rajdeep.jpg" alt="Rajdeep" style="width: 100%; height: 350px; object-fit: cover; object-position: 50% 15%;">
-            <div style="padding: 2rem;">
-              <h4 style="margin: 0 0 0.5rem 0; font-size: 1.25rem; font-weight: 800; color: var(--primary-dark);">Rajdeep</h4>
-              <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Lead Developer</p>
-              <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6; margin: 0;">"I strive to ensure our platform is as seamless and elegant as the stories we sell."</p>
+          <div class="team-card scroll-reveal" style="animation-delay: 0.1s;">
+            <img src="assets/images/icons/rajdeep.jpg" alt="Rajdeep">
+            <div class="team-info-card">
+              <h4 style="margin: 0 0 0.5rem 0; font-size: 1.4rem; font-weight: 800; color: var(--primary-dark);">Rajdeep</h4>
+              <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Lead Developer</p>
+              <p class="text-muted" style="font-size: 0.95rem; line-height: 1.5; margin: 0; font-style: italic;">"As elegant as the stories we sell."</p>
             </div>
           </div>
           
-          <div class="team-card scroll-reveal" style="background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-radius: var(--border-radius-lg); overflow: hidden; text-align: center; transition: transform 0.3s ease; animation-delay: 0.2s;">
-            <img src="assets/images/icons/srijani.png" alt="Srijani" style="width: 100%; height: 350px; object-fit: cover; object-position: 50% 15%;">
-            <div style="padding: 2rem;">
-              <h4 style="margin: 0 0 0.5rem 0; font-size: 1.25rem; font-weight: 800; color: var(--primary-dark);">Srijani</h4>
-              <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Customer Experience</p>
-              <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6; margin: 0;">"Our readers deserve white-glove support. I'm here to ensure your journey is perfect."</p>
+          <div class="team-card scroll-reveal" style="animation-delay: 0.2s;">
+            <img src="assets/images/icons/srijani.png" alt="Srijani">
+            <div class="team-info-card">
+              <h4 style="margin: 0 0 0.5rem 0; font-size: 1.4rem; font-weight: 800; color: var(--primary-dark);">Srijani</h4>
+              <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Customer Experience</p>
+              <p class="text-muted" style="font-size: 0.95rem; line-height: 1.5; margin: 0; font-style: italic;">"White-glove support for readers."</p>
             </div>
           </div>
           
@@ -181,18 +179,18 @@
           let mvHtml = '';
           if (data.mission) {
             mvHtml += `
-              <div style="background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-radius: var(--border-radius-lg); padding: 3rem 2rem; border-top: 4px solid var(--primary-color);">
-                <i class="ri-rocket-line" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1.5rem; display: inline-block;"></i>
-                <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem; color: var(--primary-dark);">Our Mission</h3>
+              <div class="feature-card scroll-reveal" style="padding: 3rem 2.5rem; text-align: left; border-top: 4px solid var(--primary-color);">
+                <i class="ri-rocket-line" style="font-size: 2.8rem; color: var(--primary-color); margin-bottom: 1.2rem; display: inline-block;"></i>
+                <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: var(--primary-dark); font-family: 'Playfair Display', serif;">Our Mission</h3>
                 <p class="text-muted" style="font-size: 1.05rem; line-height: 1.7; margin: 0;">${data.mission}</p>
               </div>
             `;
           }
           if (data.vision) {
             mvHtml += `
-              <div style="background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-radius: var(--border-radius-lg); padding: 3rem 2rem; border-top: 4px solid #f97316;">
-                <i class="ri-eye-line" style="font-size: 3rem; color: #f97316; margin-bottom: 1.5rem; display: inline-block;"></i>
-                <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem; color: var(--primary-dark);">Our Vision</h3>
+              <div class="feature-card scroll-reveal" style="padding: 3rem 2.5rem; text-align: left; border-top: 4px solid var(--secondary-color); animation-delay: 0.1s;">
+                <i class="ri-eye-line" style="font-size: 2.8rem; color: var(--secondary-color); margin-bottom: 1.2rem; display: inline-block;"></i>
+                <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: var(--primary-dark); font-family: 'Playfair Display', serif;">Our Vision</h3>
                 <p class="text-muted" style="font-size: 1.05rem; line-height: 1.7; margin: 0;">${data.vision}</p>
               </div>
             `;
@@ -207,11 +205,18 @@
           if (data.director_message || data.director_name) {
             directorContainer.style.display = 'block';
             directorContainer.innerHTML = `
-              <div style="margin-bottom: 1.5rem;">
-                <i class="ri-user-star-line" style="font-size: 3.5rem; color: var(--primary-color);"></i>
+              <div class="director-message-wrapper">
+                <div class="director-image" style="flex-shrink: 0; width: 280px; position: relative;">
+                  <img src="assets/images/icons/srijani.png" alt="Director" style="width: 100%; height: 320px; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 35px rgba(62,39,35,0.1); filter: sepia(0.2) contrast(1.05);">
+                </div>
+                <div class="director-card" style="background: linear-gradient(to right, #ffffff, #faf9f7); border-left: 4px solid var(--primary-color); box-shadow: 0 10px 25px rgba(62,39,35,0.05); border-radius: 12px; position: relative; overflow: hidden; padding: 2.5rem 3rem; flex-grow: 1;">
+                  <i class="ri-double-quotes-l" style="position: absolute; top: -15px; left: 10px; font-size: 8rem; color: rgba(62,39,35,0.03); z-index: 0; transform: rotate(-5deg);"></i>
+                  <div style="position: relative; z-index: 1;">
+                    <p style="font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic; font-weight: 500; margin-bottom: 1.5rem; line-height: 1.7; color: var(--primary-dark);">"${data.director_message || 'Welcome to Book Heaven.'}"</p>
+                    ${data.director_name ? `<div style="display: flex; align-items: center; gap: 15px;"><div style="width: 35px; height: 2px; background: var(--primary-color);"></div><h5 style="margin: 0; font-weight: 800; font-size: 0.95rem; color: var(--primary-color); text-transform: uppercase; letter-spacing: 1.5px;">${data.director_name} <span style="color: var(--text-muted); font-weight: 500; font-size: 0.8rem; letter-spacing: 0; text-transform: none; margin-left: 4px;">— Director</span></h5></div>` : ''}
+                  </div>
+                </div>
               </div>
-              <p style="font-size: 1.35rem; font-style: italic; margin-bottom: 1.5rem; line-height: 1.8; color: var(--primary-dark);">"${data.director_message || 'Welcome to Book Heaven.'}"</p>
-              ${data.director_name ? `<h5 style="margin: 0; font-weight: 800; font-size: 1.25rem; color: var(--text-color);">- ${data.director_name}, Director</h5>` : ''}
             `;
           }
 

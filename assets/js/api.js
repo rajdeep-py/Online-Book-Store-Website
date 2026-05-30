@@ -294,6 +294,8 @@ function mapBackendBook(book) {
     author: book.author_name,
     category: book.book_category || 'General',
     price: book.final_selling_price || book.price,
+    originalPrice: book.price,
+    discountPercent: book.discount_percent || 0,
     rating: book.rating || 4.5,
     stock: book.stock_amount || 0,
     image: imagePath,

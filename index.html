@@ -10,7 +10,7 @@
   
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/navbar.css?v=5">
   <link rel="stylesheet" href="assets/css/footer.css">
   <link rel="stylesheet" href="assets/css/home.css">
   <link rel="stylesheet" href="assets/css/utilities.css">
@@ -188,8 +188,8 @@
           
           <!-- Content Left -->
           <div class="home-about-content">
-            <span class="badge badge-primary mb-3">About BookHeaven</span>
-            <h2 class="mb-4" style="font-size: 2.2rem; font-weight: 800; line-height: 1.25;">Your Store to a <span>Universe of Knowledge</span></h2>
+            <span class="badge badge-primary mb-3" style="padding: 0.6rem 1rem; border-radius: 30px; font-weight: 600; letter-spacing: 1px;">About BookHeaven</span>
+            <h2 class="mb-4" style="font-size: 2.8rem; font-weight: 800; line-height: 1.2; font-family: 'Playfair Display', serif; color: var(--primary-dark);">Your Store to a <span style="color: var(--primary-color); font-style: italic;">Universe of Knowledge</span></h2>
             <p class="home-about-description" id="dyn-home-about-desc">Founded in 2026, BookHeaven has been dedicated to cultivating a premium literary haven. We curate the finest literary works across self-help, business management, fiction, and programming technology to satisfy the requirements of global learners, software engineers, and avid readers.</p>
             
             <!-- Mission and Vision -->
@@ -211,13 +211,13 @@
             </div>
 
             <!-- Partners Sponsors -->
-            <div class="partners-box" style="margin-top: 2.5rem;">
-              <h5 class="partners-title" style="margin-bottom: 1rem; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Trusted Publishing Partners</h5>
+            <div class="partners-box" style="margin-top: 3.5rem; border-top: 1px solid rgba(62,39,35,0.08); padding-top: 2rem;">
+              <h5 class="partners-title" style="margin-bottom: 1.5rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted);">Trusted Publishing Partners</h5>
               <div class="partners-logos" id="dyn-home-partners" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <div style="background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05); padding: 0.6rem 1.2rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); transition: all 0.3s ease;"><i class="ri-quill-pen-line"></i> Pearson</div>
-                <div style="background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05); padding: 0.6rem 1.2rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); transition: all 0.3s ease;"><i class="ri-terminal-box-line"></i> O'Reilly</div>
-                <div style="background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05); padding: 0.6rem 1.2rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); transition: all 0.3s ease;"><i class="ri-book-3-line"></i> Penguin</div>
-                <div style="background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05); padding: 0.6rem 1.2rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); transition: all 0.3s ease;"><i class="ri-bank-line"></i> Oxford Press</div>
+                <div style="background: #fff; border: 1px solid rgba(62,39,35,0.1); padding: 0.6rem 1.5rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.02); transition: all 0.3s ease;"><i class="ri-quill-pen-line"></i> Pearson</div>
+                <div style="background: #fff; border: 1px solid rgba(62,39,35,0.1); padding: 0.6rem 1.5rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.02); transition: all 0.3s ease;"><i class="ri-terminal-box-line"></i> O'Reilly</div>
+                <div style="background: #fff; border: 1px solid rgba(62,39,35,0.1); padding: 0.6rem 1.5rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.02); transition: all 0.3s ease;"><i class="ri-book-3-line"></i> Penguin</div>
+                <div style="background: #fff; border: 1px solid rgba(62,39,35,0.1); padding: 0.6rem 1.5rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.02); transition: all 0.3s ease;"><i class="ri-bank-line"></i> Oxford Press</div>
               </div>
             </div>
 
@@ -437,9 +437,8 @@
             
             if (aboutData.partners && Array.isArray(aboutData.partners) && aboutData.partners.length > 0) {
               document.getElementById('dyn-home-partners').innerHTML = aboutData.partners.map(p => `
-                <div title="${p.name}" onmouseover="this.style.background='rgba(0,0,0,0.06)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='rgba(0,0,0,0.03)'; this.style.transform='translateY(0)';" style="background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05); padding: 0.6rem 1.2rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); transition: all 0.3s ease; cursor: pointer;">
-                  <img src="${p.logo}" alt="${p.name}" style="height: 18px; width: auto; vertical-align: middle; filter: grayscale(100%); opacity: 0.8;" onerror="this.onerror=null; this.outerHTML='<i class=\\'ri-building-line\\' style=\\'color: var(--primary-color);\\'></i>';">
-                  ${p.name}
+                <div style="background: #fff; border: 1px solid rgba(62,39,35,0.1); padding: 0.6rem 1.5rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.02); transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--primary-color)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='rgba(62,39,35,0.1)'; this.style.transform='translateY(0)';">
+                  ${p.logo ? `<img src="${p.logo}" alt="${p.name}" style="height:18px;">` : '<i class="ri-building-2-line"></i>'} ${p.name}
                 </div>
               `).join('');
             }
