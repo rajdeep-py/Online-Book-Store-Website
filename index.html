@@ -407,7 +407,7 @@
         setTimeout(() => {
           // Select books
           const featured = books.slice(0, 4);
-          const bestsellers = books.slice(10, 14);
+          const bestsellers = books.filter(book => book.price > 499).slice(0, 4);
 
           Books.renderList(featured, featContainer);
           Books.renderList(bestsellers, bestContainer);
