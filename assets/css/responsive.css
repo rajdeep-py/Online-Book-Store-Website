@@ -276,11 +276,27 @@ html, body {
 
 /* Small Handsets & iPhone Portrait (Max-width: 480px) */
 @media (max-width: 480px) {
-  /* Page Typography Scales */
-  .hero-content h1 {
-    font-size: 2.2rem;
+  /* Responsive Typography */
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.8rem; }
+  
+  /* Reset Header for Mobile */
+  .header {
+    width: 95%;
+    max-width: 100%;
+    top: 0.5rem;
+    right: 2.5%;
+    left: 2.5%;
+    padding: 0 1rem;
+    border-radius: 12px;
+  }
+  
+  .nav-container {
+    gap: 1rem;
+    justify-content: space-between;
   }
 
+  /* Nav Adjustments */
   .text-center.mb-5.mt-4 h2 {
     font-size: 1.6rem !important;
   }

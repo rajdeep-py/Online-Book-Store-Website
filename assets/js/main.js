@@ -23,12 +23,6 @@ function getNavbarHTML() {
 
         <!-- Header Action Elements -->
         <div class="nav-actions">
-          <!-- Search Input -->
-          <div class="nav-search-bar">
-            <i class="ri-search-line"></i>
-            <input type="text" id="global-search-input" placeholder="Search by title, author...">
-          </div>
-
           <!-- Wishlist Action -->
           <a href="wishlist.html" class="action-btn" title="View Wishlist">
             <i class="ri-heart-line"></i>
@@ -218,7 +212,6 @@ function initNavbarActions() {
   
   const userMenuTrigger = document.getElementById('user-menu-trigger');
   const userMenuDropdown = document.getElementById('user-menu-dropdown');
-  const globalSearchInput = document.getElementById('global-search-input');
 
   // Sticky Scroll Header
   window.addEventListener('scroll', () => {
@@ -255,15 +248,6 @@ function initNavbarActions() {
     document.addEventListener('click', (e) => {
       if (!userMenuDropdown.contains(e.target) && e.target !== userMenuTrigger) {
         userMenuDropdown.classList.remove('active');
-      }
-    });
-  }
-
-  // Global Search bar trigger
-  if (globalSearchInput) {
-    globalSearchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' && globalSearchInput.value.trim() !== '') {
-        window.location.href = `books.html?search=${encodeURIComponent(globalSearchInput.value.trim())}`;
       }
     });
   }

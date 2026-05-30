@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 :root {
-  /* Color Palette - Premium & Modern */
-  --primary-color: #6c63ff;
-  --primary-hover: #554eff;
-  --primary-light: rgba(108, 99, 255, 0.08);
-  --secondary-color: #f5f5f5;
-  --dark-color: #1a1a24;
-  --dark-light: #2c2c3e;
-  --light-color: #ffffff;
-  --bg-color: #f8f9fd;
-  --text-color: #3f3f50;
-  --text-muted: #8c8ca0;
+  /* Color Palette - Premium Vintage Library */
+  --primary-color: #3e2723; /* Deep Dark Brown */
+  --primary-hover: #221411; /* Darker Espresso */
+  --primary-light: rgba(62, 39, 35, 0.12);
+  --secondary-color: #faebb9; /* Whitish Yellow */
+  --dark-color: #1a0f0a; /* Almost Black Brown for strong headers */
+  --dark-light: #2c1b18; /* Roast Brown */
+  --light-color: #ffffff; /* Crisp White */
+  --bg-color: #ffffff; /* Pure White Background */
+  --text-color: #2b1f1a; /* Very dark brown for high contrast reading */
+  --text-muted: #6b5344; /* Medium antique brown for muted text */
   
   /* Semantic Colors */
   --success-color: #10b981;
@@ -19,23 +19,23 @@
   --danger-color: #ef4444;
   --info-color: #3b82f6;
 
-  /* Typography */
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  /* Typography - Classic Serifs */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Lora', serif;
   
   /* Layout & Sizing */
-  --border-radius: 12px;
-  --border-radius-sm: 8px;
-  --border-radius-lg: 20px;
-  --border-color: #e8e8f3;
+  --border-radius: 8px; /* Slightly sharper for classic look */
+  --border-radius-sm: 4px;
+  --border-radius-lg: 12px;
+  --border-color: #d6c6b3;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: 0.15s ease;
   
-  /* Shadows - Layered & Sleek */
-  --shadow-sm: 0 2px 8px rgba(26, 26, 36, 0.04);
-  --shadow-md: 0 10px 25px rgba(26, 26, 36, 0.06);
-  --shadow-lg: 0 20px 40px rgba(26, 26, 36, 0.1);
-  --shadow-primary: 0 8px 24px rgba(108, 99, 255, 0.25);
+  /* Shadows - Warm Sepia Toned */
+  --shadow-sm: 0 2px 8px rgba(43, 31, 26, 0.06);
+  --shadow-md: 0 10px 25px rgba(43, 31, 26, 0.1);
+  --shadow-lg: 0 20px 40px rgba(43, 31, 26, 0.15);
+  --shadow-primary: 0 8px 24px rgba(199, 144, 56, 0.35);
   
   /* Container Widths */
   --container-width: 1280px;
@@ -287,8 +287,11 @@ img {
 
 /* Premium Book Card Styles */
 .book-card {
-  background-color: var(--light-color);
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: none;
+  box-shadow: 0 8px 32px rgba(62, 39, 35, 0.06);
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: var(--transition);
@@ -301,8 +304,7 @@ img {
 
 .book-card:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--primary-color);
+  box-shadow: 0 15px 45px rgba(62, 39, 35, 0.15);
 }
 
 .book-card-image-box {
@@ -439,3 +441,34 @@ img {
   font-size: 0.85rem;
 }
 
+/* =======================================================================
+   GLOBAL GLASSMORPHIC CARDS OVERRIDE
+   Applies glassmorphic effect and brown shadows to all cards globally
+   ======================================================================= */
+.auth-card, .cart-item-card, .summary-card, .checkout-card, .payment-method-card, 
+.contact-glass-card, .support-form-card, .book-main-image-card, .feature-card, 
+.category-card, .testimonial-card, .mission-card, .vision-card, .home-about-img-card, 
+.profile-content-card, .address-card, .add-address-card, .order-history-card {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: none !important;
+  box-shadow: 0 8px 32px rgba(62, 39, 35, 0.06) !important;
+}
+
+.auth-card:hover, .summary-card:hover, .checkout-card:hover, .payment-method-card:hover, 
+.contact-glass-card:hover, .support-form-card:hover, .book-main-image-card:hover, 
+.feature-card:hover, .category-card:hover, .testimonial-card:hover, .mission-card:hover, 
+.vision-card:hover, .home-about-img-card:hover, .profile-content-card:hover, 
+.address-card:hover, .add-address-card:hover, .order-history-card:hover {
+  box-shadow: 0 15px 45px rgba(62, 39, 35, 0.15) !important;
+  transform: translateY(-8px);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Preserve specific horizontal slide hover effect for cart items */
+.cart-item-card:hover {
+  box-shadow: 0 15px 45px rgba(62, 39, 35, 0.15) !important;
+  transform: translateX(6px);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

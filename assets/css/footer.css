@@ -1,9 +1,11 @@
 .footer {
-  background-color: #0A0A0A;
-  color: #a4a7cf;
+  background: linear-gradient(135deg, rgba(62, 39, 35, 0.95), rgba(43, 31, 26, 0.9));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  color: rgba(255, 255, 255, 0.85);
   padding: 5rem 0 2rem 0;
   margin-top: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(199, 144, 56, 0.2);
   position: relative;
 }
 
@@ -32,7 +34,7 @@
 }
 
 .footer-brand p {
-  color: #9da0bd;
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: 1.5rem;
   font-size: 0.92rem;
   max-width: 320px;
@@ -52,16 +54,16 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.05);
-  color: #c9c9d5;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 1.1rem;
   transition: var(--transition);
 }
 
 .social-btn:hover {
-  background-color: var(--primary-color);
-  color: var(--light-color);
+  background-color: var(--secondary-color);
+  color: var(--dark-color);
   transform: translateY(-3px);
-  box-shadow: var(--shadow-primary);
+  box-shadow: 0 5px 15px rgba(199, 144, 56, 0.3);
 }
 
 .footer-heading {
@@ -79,7 +81,7 @@
   bottom: -0.5rem;
   width: 30px;
   height: 2px;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
 }
 
 .footer-links {
@@ -92,13 +94,13 @@
 .footer-links a {
   display: flex;
   align-items: center;
-  color: #a4a7cf;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.95rem;
   transition: var(--transition);
 }
 
 .footer-links a i {
-  color: var(--primary-color);
+  color: var(--secondary-color);
   transition: var(--transition);
   opacity: 0;
   transform: translateX(-10px);
@@ -112,12 +114,12 @@
 }
 
 .footer-links a:hover {
-  color: var(--light-color);
+  color: var(--secondary-color);
   padding-left: 5px;
 }
 
 .footer-newsletter p {
-  color: #9da0bd;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.92rem;
   margin-bottom: 1.5rem;
 }
@@ -142,9 +144,9 @@
 
 .newsletter-inline-form input:focus {
   background-color: rgba(255, 255, 255, 0.06);
-  border-color: var(--primary-color);
+  border-color: var(--secondary-color);
   outline: none;
-  box-shadow: 0 0 15px rgba(108, 99, 255, 0.1);
+  box-shadow: 0 0 15px rgba(199, 144, 56, 0.15);
 }
 
 .newsletter-inline-form button {
@@ -160,7 +162,15 @@
   align-items: center;
   justify-content: center;
   border: none;
-  box-shadow: 0 4px 10px rgba(108, 99, 255, 0.2);
+  background-color: var(--secondary-color);
+  color: var(--dark-color);
+  box-shadow: 0 4px 10px rgba(199, 144, 56, 0.3);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.newsletter-inline-form button:hover {
+  transform: scale(1.05);
 }
 
 .newsletter-inline-form button i {
@@ -174,7 +184,7 @@
   align-items: center;
   justify-content: space-between;
   font-size: 0.85rem;
-  color: #7d80a1;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .footer-bottom-links {
@@ -183,5 +193,5 @@
 }
 
 .footer-bottom-links a:hover {
-  color: var(--primary-color);
+  color: var(--secondary-color);
 }

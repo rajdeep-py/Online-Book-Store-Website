@@ -1,48 +1,50 @@
 .header {
   position: fixed;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 96%;
-  max-width: 1400px;
+  top: 1.5rem;
+  right: 2rem;
+  left: auto;
+  transform: none;
+  width: max-content;
+  padding: 0 2rem;
   height: var(--header-height);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.15));
+  background: linear-gradient(135deg, rgba(62, 39, 35, 0.8), rgba(43, 31, 26, 0.6));
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
+  border: 1px solid rgba(199, 144, 56, 0.2);
+  border-radius: 50px;
   z-index: 1000;
   transition: var(--transition);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+  box-shadow: 0 8px 32px rgba(43, 31, 26, 0.05);
 }
 
 .header.scrolled {
   height: 70px;
   top: 0.5rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
-  box-shadow: 0 10px 40px rgba(31, 38, 135, 0.1);
-  border-color: rgba(255, 255, 255, 0.6);
+  right: 1.5rem;
+  background: linear-gradient(135deg, rgba(43, 31, 26, 0.95), rgba(62, 39, 35, 0.7));
+  box-shadow: 0 10px 40px rgba(43, 31, 26, 0.2);
+  border-color: rgba(199, 144, 56, 0.3);
 }
 
 /* Navbar Hover Effects */
 .header:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
-  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.12);
-  border-color: rgba(255, 255, 255, 0.6);
-  transform: translateX(-50%) translateY(-2px);
+  background: linear-gradient(135deg, rgba(62, 39, 35, 0.9), rgba(43, 31, 26, 0.7));
+  box-shadow: 0 12px 40px rgba(43, 31, 26, 0.2);
+  border-color: rgba(199, 144, 56, 0.3);
+  transform: translateY(-2px);
 }
 
 .header.scrolled:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7));
-  box-shadow: 0 15px 50px rgba(31, 38, 135, 0.15);
-  border-color: rgba(255, 255, 255, 0.8);
-  transform: translateX(-50%) translateY(-1px);
+  background: linear-gradient(135deg, rgba(43, 31, 26, 1), rgba(62, 39, 35, 0.8));
+  box-shadow: 0 15px 50px rgba(43, 31, 26, 0.25);
+  border-color: rgba(199, 144, 56, 0.4);
+  transform: translateY(-1px);
 }
 
 .nav-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 3rem;
   height: 100%;
 }
 
@@ -54,16 +56,16 @@
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--dark-color);
+  color: #ffffff !important;
 }
 
 .logo span {
-  color: var(--primary-color);
+  color: var(--secondary-color) !important;
 }
 
 .logo-icon {
   font-size: 1.8rem;
-  color: var(--primary-color);
+  color: var(--secondary-color) !important;
 }
 
 /* Nav Menu */
@@ -78,13 +80,13 @@
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 0.95rem;
-  color: var(--text-color);
+  color: rgba(255, 255, 255, 0.85);
   position: relative;
   padding: 0.5rem 0;
 }
 
 .nav-link:hover, .nav-link.active {
-  color: var(--primary-color);
+  color: #ffffff;
 }
 
 .nav-link::after {
@@ -94,7 +96,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   transition: var(--transition);
 }
 
@@ -148,7 +150,7 @@
   background: none;
   border: none;
   font-size: 1.3rem;
-  color: var(--dark-color);
+  color: #ffffff;
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
@@ -159,8 +161,8 @@
 }
 
 .action-btn:hover {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--secondary-color);
 }
 
 .nav-badge {
@@ -271,7 +273,7 @@
 .hamburger-toggle span {
   width: 100%;
   height: 2px;
-  background-color: var(--dark-color);
+  background-color: #ffffff;
   border-radius: 4px;
   transition: var(--transition);
 }
@@ -283,7 +285,10 @@
   right: -300px;
   width: 280px;
   height: 100vh;
-  background-color: var(--light-color);
+  background: linear-gradient(135deg, rgba(62, 39, 35, 0.95), rgba(43, 31, 26, 0.9));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid rgba(199, 144, 56, 0.2);
   box-shadow: var(--shadow-lg);
   z-index: 1010;
   padding: 2rem;
@@ -314,11 +319,11 @@
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 1.1rem;
-  color: var(--dark-color);
+  color: rgba(255, 255, 255, 0.9);
   display: block;
 }
 
 .mobile-nav-link:hover, .mobile-nav-link.active {
-  color: var(--primary-color);
+  color: var(--secondary-color);
   padding-left: 5px;
 }
