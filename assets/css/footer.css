@@ -29,7 +29,7 @@
 }
 
 .footer-brand .logo {
-  color: #C79038;
+  color: #FFFFFF;
   margin-bottom: 1.5rem;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .footer-heading {
-  color: #C79038;
+  color: #FFFFFF;
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
@@ -194,4 +194,29 @@
 
 .footer-bottom-links a:hover {
   color: var(--secondary-color);
+}
+
+/* Force all footer text, icons and links to white (moved from inline) */
+.footer, .footer * {
+  color: #FFFFFF !important;
+}
+.footer a {
+  color: #FFFFFF !important;
+}
+.footer .social-btn i {
+  color: #FFFFFF !important;
+}
+.footer .newsletter-inline-form input,
+.footer .newsletter-inline-form input::placeholder {
+  color: #FFFFFF !important;
+  opacity: 1;
+}
+.footer .footer-heading { color: #FFFFFF !important; }
+.footer .logo img { color: inherit; }
+
+/* Ensure footer logo text isn't overridden by global navbar rules */
+.footer .logo,
+.footer .logo span,
+.footer .logo-icon {
+  color: #FFFFFF !important;
 }
