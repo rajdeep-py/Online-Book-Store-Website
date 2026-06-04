@@ -93,6 +93,18 @@ The frontend is designed to natively hook into a backend REST API.
 
 ---
 
+## 🚀 Running the Frontend Locally (Windows & macOS)
+
+> ⚠️ **IMPORTANT**: Do **NOT** open `index.html` by double-clicking the file in your file explorer! Doing so will open the site using the `file:///` protocol, which causes modern browsers to block API requests and 3D model loads due to strict **CORS** security policies.
+
+To run the Website correctly:
+1. Open the `Online-Book-Store-Website` folder in **Visual Studio Code**.
+2. Install the **"Live Server"** extension (by Ritwick Dey) from the VS Code Extensions panel.
+3. Right-click on `index.html` and select **"Open with Live Server"**.
+4. The website will open in your browser at `http://127.0.0.1:5500`, bypassing all CORS and file protocol restrictions so it can load the 3D models and freely talk to the Java backend!
+
+---
+
 ## 6. Developer Team
 
 - **Raj** - *Head of Curation*
